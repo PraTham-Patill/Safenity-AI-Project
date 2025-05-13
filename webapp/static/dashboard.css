@@ -1,0 +1,411 @@
+/* Dashboard.css - CrimeVision AI Dashboard Styles */
+
+/* Main Dashboard Container */
+.dashboard-container {
+    padding: 30px 20px;
+}
+
+/* Header Section */
+.header-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.subtitle-text {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--accent-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* SOS Emergency Button */
+.sos-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sos-button {
+    background: linear-gradient(135deg, #ff3131, #ff5757);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(255, 49, 49, 0.5);
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.sos-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 49, 49, 0.7);
+}
+
+.sos-button i {
+    margin-right: 10px;
+}
+
+.sos-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 15px;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 216, 255, 0.2);
+    border-color: rgba(0, 216, 255, 0.3);
+}
+
+.card-icon {
+    background: rgba(255, 255, 255, 0.05);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card-icon i {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-content h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.card-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.alert-badge, .distance-badge, .event-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.alert-badge {
+    background: rgba(0, 128, 255, 0.15);
+    color: #00a0ff;
+    border: 1px solid rgba(0, 128, 255, 0.3);
+}
+
+.alert-badge.warning {
+    background: rgba(255, 166, 0, 0.15);
+    color: #ffa600;
+    border: 1px solid rgba(255, 166, 0, 0.3);
+}
+
+.distance-badge {
+    background: rgba(0, 200, 83, 0.15);
+    color: #00c853;
+    border: 1px solid rgba(0, 200, 83, 0.3);
+}
+
+.event-badge {
+    background: rgba(156, 39, 176, 0.15);
+    color: #9c27b0;
+    border: 1px solid rgba(156, 39, 176, 0.3);
+}
+
+.card-footer {
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.btn-explore {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-explore i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.btn-explore:hover {
+    background: var(--accent-color);
+    color: var(--dark-color);
+}
+
+.btn-explore:hover i {
+    transform: translateX(5px);
+}
+
+/* Recent Activity Section */
+.recent-activity-section {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.section-header h2 i {
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+.btn-view-all {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-view-all:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.activity-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.activity-icon.alert {
+    background: rgba(255, 76, 76, 0.15);
+    color: #ff4c4c;
+}
+
+.activity-icon.info {
+    background: rgba(0, 176, 255, 0.15);
+    color: #00b0ff;
+}
+
+.activity-icon.location {
+    background: rgba(0, 200, 83, 0.15);
+    color: #00c853;
+}
+
+.activity-content h4 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.activity-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.activity-time {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Quick Stats Section */
+.quick-stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stats-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 216, 255, 0.15);
+}
+
+.stats-icon {
+    background: rgba(255, 255, 255, 0.05);
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.stats-icon i {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.stats-content h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.stats-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: baseline;
+}
+
+.stats-unit {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-left: 5px;
+}
+
+.stats-trend {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+}
+
+.stats-trend i {
+    margin-right: 5px;
+}
+
+.stats-trend.positive {
+    color: #00c853;
+}
+
+.stats-trend.negative {
+    color: #ff4c4c;
+}
+
+/* Particle Animation */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+    .dashboard-grid, .quick-stats-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -1,0 +1,494 @@
+/* ===== POLICE STATIONS PAGE STYLES ===== */
+
+/* Map Container */
+.map-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    height: 500px;
+    position: relative;
+}
+
+#police-map {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.map-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-secondary);
+}
+
+.map-placeholder i {
+    font-size: 4rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.map-placeholder p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.map-controls {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background-color: rgba(20, 20, 20, 0.8);
+    border-top: 1px solid rgba(150, 150, 150, 0.1);
+}
+
+.btn-map-control {
+    background: linear-gradient(135deg, rgba(0, 216, 255, 0.1), rgba(0, 160, 233, 0.2));
+    color: white;
+    border: 1px solid rgba(0, 216, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-map-control:hover {
+    background: linear-gradient(135deg, rgba(0, 216, 255, 0.3), rgba(0, 160, 233, 0.4));
+    transform: translateY(-2px);
+}
+
+.btn-map-control i {
+    margin-right: 8px;
+}
+
+.radius-control {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 10px;
+}
+
+.radius-control label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.radius-control .form-select {
+    background-color: rgba(30, 30, 30, 0.8);
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    color: white;
+    width: 100px;
+    height: 40px;
+    border-radius: 6px;
+}
+
+/* Police Stations List */
+.police-list {
+    padding: 20px;
+}
+
+.police-station {
+    display: flex;
+    background-color: rgba(30, 30, 30, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(150, 150, 150, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.police-station:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 216, 255, 0.15);
+}
+
+.station-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(0, 216, 255, 0.2), rgba(0, 160, 233, 0.3));
+    border-radius: 50%;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.station-icon i {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+
+.station-details {
+    flex-grow: 1;
+}
+
+.station-details h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.station-address {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.station-address i {
+    color: var(--accent-color);
+    margin-right: 6px;
+}
+
+.station-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.info-badge {
+    background-color: rgba(40, 40, 40, 0.7);
+    color: var(--text-secondary);
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.info-badge i {
+    margin-right: 5px;
+    color: var(--accent-color);
+}
+
+.info-badge.primary {
+    background-color: rgba(0, 216, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(0, 216, 255, 0.3);
+}
+
+.station-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-station-action {
+    background-color: rgba(40, 40, 40, 0.7);
+    color: white;
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-station-action:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-station-action i {
+    margin-right: 6px;
+}
+
+.show-more-container {
+    text-align: center;
+    padding: 0 20px 20px;
+}
+
+.btn-show-more {
+    background-color: rgba(30, 30, 30, 0.7);
+    color: var(--text-secondary);
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-show-more:hover {
+    background-color: rgba(40, 40, 40, 0.8);
+    color: white;
+}
+
+.btn-show-more i {
+    margin-left: 5px;
+}
+
+/* Emergency Services */
+.emergency-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.emergency-card {
+    background-color: rgba(30, 30, 30, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(150, 150, 150, 0.1);
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.emergency-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.emergency-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
+.emergency-icon i {
+    font-size: 2.5rem;
+}
+
+.emergency-icon.police {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.3));
+}
+
+.emergency-icon.police i {
+    color: #0d6efd;
+}
+
+.emergency-icon.fire {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(220, 53, 69, 0.3));
+}
+
+.emergency-icon.fire i {
+    color: #dc3545;
+}
+
+.emergency-icon.ambulance {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.2), rgba(40, 167, 69, 0.3));
+}
+
+.emergency-icon.ambulance i {
+    color: #28a745;
+}
+
+.emergency-icon.helpline {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.3));
+}
+
+.emergency-icon.helpline i {
+    color: #ffc107;
+}
+
+.emergency-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.emergency-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.service-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.btn-call-emergency {
+    background: linear-gradient(135deg, rgba(0, 216, 255, 0.3), rgba(0, 160, 233, 0.4));
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-call-emergency:hover {
+    background: linear-gradient(135deg, rgba(0, 216, 255, 0.5), rgba(0, 160, 233, 0.6));
+    transform: translateY(-2px);
+}
+
+.btn-call-emergency i {
+    margin-right: 8px;
+}
+
+/* Complaint Form */
+.complaint-form-container {
+    padding: 20px;
+}
+
+.form-intro {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.complaint-form .form-group {
+    margin-bottom: 15px;
+}
+
+.complaint-form label {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.complaint-form .form-control,
+.complaint-form .form-select {
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.complaint-form .form-control:focus,
+.complaint-form .form-select:focus {
+    background-color: rgba(40, 40, 40, 0.8);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 216, 255, 0.25);
+}
+
+.complaint-form .form-text {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.complaint-form .form-check-input {
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(150, 150, 150, 0.3);
+}
+
+.complaint-form .form-check-input:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.complaint-form .form-check-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.submit-btn-container {
+    text-align: center;
+}
+
+.btn-submit-complaint {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    min-width: 200px;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 216, 255, 0.3);
+}
+
+.btn-submit-complaint:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 216, 255, 0.4);
+}
+
+.btn-submit-complaint i {
+    margin-right: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .police-station {
+        flex-direction: column;
+    }
+    
+    .station-icon {
+        margin: 0 auto 15px;
+    }
+    
+    .station-details {
+        text-align: center;
+    }
+    
+    .station-actions {
+        justify-content: center;
+    }
+    
+    .map-controls {
+        flex-direction: column;
+    }
+    
+    .radius-control {
+        margin-left: 0;
+        margin-top: 10px;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .emergency-services {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Focus States for Accessibility */
+.btn-map-control:focus,
+.btn-station-action:focus,
+.btn-call-emergency:focus,
+.btn-show-more:focus,
+.btn-submit-complaint:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Animation for Button Clicks */
+.btn-map-control:active,
+.btn-station-action:active,
+.btn-call-emergency:active,
+.btn-show-more:active,
+.btn-submit-complaint:active {
+    transform: scale(0.95);
+}

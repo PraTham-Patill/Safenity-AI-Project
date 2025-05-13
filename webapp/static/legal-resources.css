@@ -1,0 +1,953 @@
+/* Legal Resources Page Specific Styles */
+
+/* Main Container Styles */
+.legal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Header Section */
+.header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.title-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle-text {
+    font-size: 1.2rem;
+    color: #c5c5c5;
+    margin-bottom: 1.5rem;
+}
+
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.badge {
+    background: rgba(78, 99, 255, 0.15);
+    color: #4E63FF;
+    border: 1px solid rgba(78, 99, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    background: rgba(78, 99, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Breadcrumb Styles */
+.breadcrumb-container {
+    margin-bottom: 2rem;
+}
+
+.breadcrumb {
+    padding: 0.8rem 1rem;
+    background: rgba(30, 30, 45, 0.5);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item {
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item a {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #4E63FF;
+}
+
+.breadcrumb-item.active {
+    color: #4E63FF;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    content: "/";
+    color: #505050;
+}
+
+/* Quick Actions Section */
+.quick-actions-section {
+    margin-bottom: 3rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin: 0;
+    color: #f0f0f0;
+}
+
+.section-header i {
+    color: #4E63FF;
+    margin-right: 0.8rem;
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-card {
+    background: rgba(30, 30, 45, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    background: rgba(40, 40, 60, 0.7);
+    border-color: rgba(78, 99, 255, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    color: #4E63FF;
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    color: #f0f0f0;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Resource Sections */
+.resource-section {
+    background: rgba(25, 25, 35, 0.5);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.resource-section:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-color: rgba(78, 99, 255, 0.2);
+}
+
+.resource-description {
+    color: #c5c5c5;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Free Legal Aid Section */
+.legal-aid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.aid-card {
+    background: rgba(30, 30, 45, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.aid-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.aid-card-header {
+    background: rgba(78, 99, 255, 0.15);
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(78, 99, 255, 0.2);
+}
+
+.aid-card-header i {
+    font-size: 1.8rem;
+    color: #4E63FF;
+    margin-right: 1rem;
+}
+
+.aid-card-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    color: #f0f0f0;
+}
+
+.aid-card-body {
+    padding: 1.2rem;
+}
+
+.aid-card-body p {
+    color: #c5c5c5;
+    margin-bottom: 1rem;
+}
+
+.aid-services {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.aid-services li {
+    margin-bottom: 0.5rem;
+    color: #d0d0d0;
+}
+
+.aid-services li i {
+    color: #4E63FF;
+    margin-right: 0.5rem;
+}
+
+.aid-contact {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+.aid-contact div {
+    margin-bottom: 0.3rem;
+}
+
+.aid-contact i {
+    margin-right: 0.5rem;
+    color: #4E63FF;
+}
+
+.aid-card-footer {
+    padding: 1rem 1.2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-contact {
+    display: inline-block;
+    background: rgba(78, 99, 255, 0.15);
+    color: #4E63FF;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(78, 99, 255, 0.3);
+}
+
+.btn-contact:hover {
+    background: rgba(78, 99, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.eligibility-checker {
+    background: rgba(30, 30, 45, 0.4);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.eligibility-checker h4 {
+    color: #f0f0f0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.eligibility-checker i {
+    color: #4E63FF;
+    margin-right: 0.5rem;
+}
+
+.btn-eligibility {
+    display: inline-block;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.btn-eligibility:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 99, 255, 0.3);
+}
+
+/* Know Your Rights Section */
+.rights-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.rights-category {
+    background: rgba(30, 30, 45, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rights-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.category-header {
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.category-header i {
+    font-size: 1.5rem;
+    color: #4E63FF;
+    margin-right: 1rem;
+}
+
+.category-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    color: #f0f0f0;
+}
+
+.category-body {
+    padding: 1.2rem;
+}
+
+.category-body p {
+    color: #c5c5c5;
+    margin-bottom: 1rem;
+}
+
+.rights-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.rights-list li {
+    margin-bottom: 0.7rem;
+}
+
+.rights-list li a {
+    color: #d0d0d0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 0.5rem 0;
+}
+
+.rights-list li a:hover {
+    color: #4E63FF;
+}
+
+.rights-list li a i {
+    color: #4E63FF;
+    margin-right: 0.5rem;
+}
+
+.category-footer {
+    padding: 1rem 1.2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-more {
+    display: inline-block;
+    background: rgba(78, 99, 255, 0.1);
+    color: #4E63FF;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-more:hover {
+    background: rgba(78, 99, 255, 0.2);
+}
+
+.rights-pocket-guide {
+    background: rgba(30, 30, 45, 0.4);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rights-pocket-guide h4 {
+    color: #f0f0f0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.rights-pocket-guide i {
+    color: #4E63FF;
+    margin-right: 0.5rem;
+}
+
+.guides-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.guide-download {
+    display: flex;
+    align-items: center;
+    background: rgba(78, 99, 255, 0.1);
+    color: #4E63FF;
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.guide-download:hover {
+    background: rgba(78, 99, 255, 0.2);
+}
+
+.guide-download i {
+    margin-right: 0.5rem;
+}
+
+/* Document Templates Section */
+.template-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.template-category {
+    background: rgba(30, 30, 45, 0.4);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.template-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.template-icon {
+    font-size: 2rem;
+    color: #4E63FF;
+    margin-bottom: 1rem;
+}
+
+.template-category h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #f0f0f0;
+}
+
+.template-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.template-list li {
+    margin-bottom: 0.7rem;
+}
+
+.template-list li a {
+    color: #d0d0d0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 0.5rem 0;
+}
+
+.template-list li a:hover {
+    color: #4E63FF;
+}
+
+.template-list li a i {
+    color: #4E63FF;
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.template-disclaimer {
+    background: rgba(30, 30, 45, 0.4);
+    padding: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 2rem;
+}
+
+.disclaimer-icon {
+    font-size: 2rem;
+    color: #FFB400;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.disclaimer-text h4 {
+    color: #f0f0f0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.disclaimer-text p {
+    color: #c5c5c5;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Legal Consultation Section */
+.consultation-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.consultation-card {
+    background: rgba(30, 30, 45, 0.4);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.consultation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.consultation-card.featured {
+    border-color: rgba(78, 99, 255, 0.3);
+    position: relative;
+}
+
+.consultation-card.featured::before {
+    content: "Popular";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(78, 99, 255, 0.9);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.consultation-header {
+    background: rgba(30, 30, 50, 0.7);
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.consultation-header i {
+    font-size: 2rem;
+    color: #4E63FF;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.consultation-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: #f0f0f0;
+}
+
+.price-tag {
+    display: inline-block;
+    background: rgba(78, 99, 255, 0.1);
+    color: #4E63FF;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.consultation-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.consultation-body p {
+    color: #c5c5c5;
+    margin-bottom: 1.2rem;
+}
+
+.consultation-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.consultation-features li {
+    color: #d0d0d0;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+}
+
+.consultation-features li i {
+    color: #4CAF50;
+    margin-right: 0.7rem;
+    flex-shrink: 0;
+}
+
+.consultation-footer {
+    padding: 1.2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-book {
+    display: inline-block;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-book:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 99, 255, 0.3);
+}
+
+.attorney-filter {
+    background: rgba(30, 30, 45, 0.4);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.attorney-filter h4 {
+    color: #f0f0f0;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.attorney-filter i {
+    color: #4E63FF;
+    margin-right: 0.5rem;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.filter-button {
+    background: rgba(30, 30, 45, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #d0d0d0;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+    background: rgba(78, 99, 255, 0.15);
+    color: #4E63FF;
+}
+
+.filter-button.active {
+    background: rgba(78, 99, 255, 0.15);
+    color: #4E63FF;
+    border-color: rgba(78, 99, 255, 0.3);
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-bottom: 3rem;
+}
+
+.accordion-item {
+    background: rgba(30, 30, 45, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 0.8rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: rgba(30, 30, 50, 0.7);
+    color: #f0f0f0;
+    font-weight: 500;
+    padding: 1.2rem;
+    border: none;
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(78, 99, 255, 0.15);
+    color: #4E63FF;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(78, 99, 255, 0.3);
+}
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%234E63FF'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-body {
+    padding: 1.2rem;
+    color: #c5c5c5;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    background: rgba(25, 25, 35, 0.5);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.newsletter-content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.newsletter-icon {
+    font-size: 2.5rem;
+    color: #4E63FF;
+    flex-shrink: 0;
+}
+
+.newsletter-text {
+    flex-grow: 1;
+}
+
+.newsletter-text h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #f0f0f0;
+}
+
+.newsletter-text p {
+    color: #c5c5c5;
+    margin: 0;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    flex-shrink: 0;
+}
+
+.newsletter-input {
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    background: rgba(30, 30, 45, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+    font-size: 0.95rem;
+    min-width: 250px;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: rgba(78, 99, 255, 0.3);
+}
+
+.newsletter-button {
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 99, 255, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .newsletter-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .newsletter-form {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .template-disclaimer {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .disclaimer-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .title-text {
+        font-size: 2.2rem;
+    }
+    
+    .consultation-card.featured::before {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    
+    .quick-actions-grid,
+    .legal-aid-cards,
+    .rights-categories,
+    .template-categories,
+    .consultation-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .legal-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .resource-section {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation Effects */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resource-section {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.resource-section:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.resource-section:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.resource-section:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* Hover Effects for Cards */
+.aid-card:hover .aid-card-header,
+.consultation-card:hover .consultation-header {
+    background: rgba(78, 99, 255, 0.2);
+}
+
+.aid-card:hover .aid-card-header i,
+.consultation-card:hover .consultation-header i {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* Focus States for Accessibility */
+a:focus,
+button:focus,
+input:focus {
+    outline: 2px solid rgba(78, 99, 255, 0.5);
+    outline-offset: 2px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+    outline: none;
+}

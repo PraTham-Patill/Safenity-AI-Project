@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime News & Alerts - CrimeVision AI</title>
+
+    <!-- Bootstrap for Styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='crime-news.css') }}">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div id="particles"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history"><i class="fas fa-history"></i> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="title-text">Crime News & Alerts</h1>
+            <p class="subtitle-text">Stay informed about criminal activity in your area</p>
+            <div class="tech-badges">
+                <span class="badge">Real-time Updates</span>
+                <span class="badge">Crime Heatmap</span>
+                <span class="badge">Personalized Alerts</span>
+            </div>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner">
+            <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="alert-content">
+                <h3>Active Alert: Vehicle Theft</h3>
+                <p>Multiple vehicles reported stolen in the downtown area within the last 24 hours. Please secure your vehicles and report any suspicious activity.</p>
+                <div class="alert-time">Updated: 2 hours ago</div>
+            </div>
+        </div>
+
+        <!-- Crime Heatmap Section -->
+       
+
+        <!-- Recent Crime News -->
+        <div class="news-section">
+            <div class="section-header">
+                <h2><i class="fas fa-newspaper"></i> Recent Crime News</h2>
+                <button class="btn-view-all">View All</button>
+            </div>
+            <div class="news-grid">
+                <!-- News Item 1 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="/api/placeholder/300/200" alt="Police car">
+                        <div class="news-category">Theft</div>
+                    </div>
+                    <div class="news-content">
+                        <h3>Series of Catalytic Converter Thefts Reported</h3>
+                        <p>Police are investigating multiple catalytic converter thefts that occurred overnight in the eastern suburbs...</p>
+                        <div class="news-footer">
+                            <span class="news-time"><i class="far fa-clock"></i> 4 hours ago</span>
+                            <a href="#" class="news-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Item 2 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="/api/placeholder/300/200" alt="Cybersecurity concept">
+                        <div class="news-category">Cybercrime</div>
+                    </div>
+                    <div class="news-content">
+                        <h3>New Phishing Scam Targeting Local Businesses</h3>
+                        <p>A sophisticated phishing campaign is targeting local business owners with fake invoices and payment requests...</p>
+                        <div class="news-footer">
+                            <span class="news-time"><i class="far fa-clock"></i> 1 day ago</span>
+                            <a href="#" class="news-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Item 3 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="/api/placeholder/300/200" alt="Community meeting">
+                        <div class="news-category">Community</div>
+                    </div>
+                    <div class="news-content">
+                        <h3>Neighborhood Watch Program Expansion</h3>
+                        <p>The city council approved funding to expand the neighborhood watch program to five additional areas...</p>
+                        <div class="news-footer">
+                            <span class="news-time"><i class="far fa-clock"></i> 2 days ago</span>
+                            <a href="#" class="news-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crime Statistics -->
+        <div class="stats-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-bar"></i> Crime Statistics</h2>
+                <div class="period-selector">
+                    <button class="period-btn active">Week</button>
+                    <button class="period-btn">Month</button>
+                    <button class="period-btn">Year</button>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stats-chart">
+                    <h4>Crime Types Distribution</h4>
+                    <div class="chart-placeholder">
+                        <img src="/api/placeholder/400/300" alt="Pie chart of crime types">
+                        <!-- Chart would be implemented with actual chart library in production -->
+                    </div>
+                </div>
+                <div class="stats-chart">
+                    <h4>Crimes by Time of Day</h4>
+                    <div class="chart-placeholder">
+                        <img src="/api/placeholder/400/300" alt="Bar chart of crimes by time">
+                        <!-- Chart would be implemented with actual chart library in production -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Alerts Settings -->
+        <div class="alerts-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bell"></i> My Alert Settings</h2>
+                <button class="btn-settings"><i class="fas fa-cog"></i> Manage</button>
+            </div>
+            <div class="alerts-grid">
+                <div class="alert-setting-card active">
+                    <div class="alert-setting-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="alert-setting-content">
+                        <h4>Home Area Alerts</h4>
+                        <p>Receive alerts for crimes within 5km of your home address</p>
+                        <div class="alert-toggle">
+                            <span class="toggle-label">Enabled</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-setting-card active">
+                    <div class="alert-setting-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="alert-setting-content">
+                        <h4>Work Area Alerts</h4>
+                        <p>Receive alerts for crimes within 3km of your workplace</p>
+                        <div class="alert-toggle">
+                            <span class="toggle-label">Enabled</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-setting-card">
+                    <div class="alert-setting-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="alert-setting-content">
+                        <h4>Serious Crime Alerts</h4>
+                        <p>Receive city-wide alerts for serious crimes only</p>
+                        <div class="alert-toggle">
+                            <span class="toggle-label">Disabled</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-brand">
+                        <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+                    </div>
+                    <p>Making communities safer through technology and awareness</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Important Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="mt-3">Emergency Helpline: <strong>100</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CrimeVision AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Particles.js for background animation -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- Particles.js Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize particles.js
+            particlesJS('particles', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#808080",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+
+</html>

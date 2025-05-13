@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection History - CrimeVision AI</title>
+
+    <!-- Bootstrap for Styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div id="particles"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/history"><i class="fas fa-history"></i> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="title-text">Detection History</h1>
+            <p class="subtitle-text">Review your past crime detection analyses</p>
+            <div class="tech-badges">
+                <span class="badge">Analysis Records</span>
+                <span class="badge">Incident Timeline</span>
+                <span class="badge">Secure Storage</span>
+            </div>
+        </div>
+
+        <!-- History Container -->
+        <div class="glass-container">
+            <div class="container-header">
+                <i class="fas fa-history"></i> Detection History
+                <div class="filter-controls">
+                    <select class="form-select form-select-sm" id="history-filter">
+                        <option value="all">All Detections</option>
+                        <option value="crime">Criminal Activity</option>
+                        <option value="normal">Normal Activity</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="history-list">
+                {% if detection_history %}
+                    {% for entry in detection_history %}
+                    <div class="history-item">
+                        <div class="history-thumbnail">
+                            {% if entry.thumbnail and entry.thumbnail.startswith('data:image') %}
+                                <img src="{{ entry.thumbnail }}" alt="Detection thumbnail" class="img-fluid">
+                            {% elif entry.thumbnail %}
+                                <img src="data:image/jpeg;base64,{{ entry.thumbnail }}" alt="Detection thumbnail" class="img-fluid">
+                            {% else %}
+                                <div class="no-thumbnail"><i class="fas fa-file-video"></i></div>
+                            {% endif %}
+                            <div class="detection-type {{ 'alert' if entry.crime_detected else 'normal' }}">
+                                {{ entry.crime_label }}
+                            </div>
+                        </div>
+                        <div class="history-details">
+                            <h4>{{ entry.crime_label }}</h4>
+                            <p>Confidence: {{ entry.confidence }}%</p>
+                            <div class="history-meta">
+                                <span><i class="far fa-calendar-alt"></i> {{ entry.date }}</span>
+                                <span><i class="far fa-clock"></i> {{ entry.time }}</span>
+                                {% if entry.location %}
+                                <span><i class="fas fa-map-marker-alt"></i> {{ entry.location }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="history-actions">
+                            <a href="/view-detection/{{ entry.id }}" class="btn-view">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                            <button class="btn-delete" data-id="{{ entry.id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-history">
+                        <i class="fas fa-history empty-icon"></i>
+                        <h3>No Detection History</h3>
+                        <p>Your past detection analyses will appear here</p>
+                        <a href="/" class="btn-primary">Start Detection</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if detection_history and detection_history|length > 5 %}
+            <div class="pagination-controls">
+                <button class="btn-page" id="prev-page" disabled><i class="fas fa-chevron-left"></i></button>
+                <span class="page-indicator">Page <span id="current-page">1</span> of <span id="total-pages">{{ (detection_history|length / 5)|round(0, 'ceil')|int }}</span></span>
+                <button class="btn-page" id="next-page"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>CrimeVision<span class="text-highlight">AI</span></h4>
+                <p>Next generation AI-powered crime detection and prevention system. Enhancing public safety through
+                    cutting-edge technology.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Integration</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> support@crimevision.ai</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> New York, NY 10001</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CrimeVision AI. All rights reserved. | <span class="certified-text">FCC Certified
+                    Technology</span></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Particles.js for background animation -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize particles.js
+            particlesJS('particles', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#808080",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // History filtering functionality
+            const historyFilter = document.getElementById('history-filter');
+            if (historyFilter) {
+                historyFilter.addEventListener('change', function() {
+                    const filterValue = this.value;
+                    const historyItems = document.querySelectorAll('.history-item');
+                    
+                    historyItems.forEach(item => {
+                        const detectionType = item.querySelector('.detection-type');
+                        if (filterValue === 'all') {
+                            item.style.display = 'flex';
+                        } else if (filterValue === 'crime' && detectionType.classList.contains('alert')) {
+                            item.style.display = 'flex';
+                        } else if (filterValue === 'normal' && detectionType.classList.contains('normal')) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // Delete functionality
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    if (confirm('Are you sure you want to delete this detection record?')) {
+                        fetch(`/delete-detection/${id}`, {
+                            method: 'POST'
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Remove the item from the DOM
+                                this.closest('.history-item').remove();
+                                // Check if there are no more items
+                                const remainingItems = document.querySelectorAll('.history-item');
+                                if (remainingItems.length === 0) {
+                                    const historyList = document.querySelector('.history-list');
+                                    historyList.innerHTML = `
+                                        <div class="no-history">
+                                            <i class="fas fa-history empty-icon"></i>
+                                            <h3>No Detection History</h3>
+                                            <p>Your past detection analyses will appear here</p>
+                                            <a href="/" class="btn-primary">Start Detection</a>
+                                        </div>
+                                    `;
+                                }
+                            } else {
+                                alert('Failed to delete the record. Please try again.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred. Please try again.');
+                        });
+                    }
+                });
+            });
+
+            // Pagination functionality
+            const prevPageBtn = document.getElementById('prev-page');
+            const nextPageBtn = document.getElementById('next-page');
+            const currentPageSpan = document.getElementById('current-page');
+            const totalPagesSpan = document.getElementById('total-pages');
+            
+            if (prevPageBtn && nextPageBtn) {
+                let currentPage = 1;
+                const itemsPerPage = 5;
+                const historyItems = document.querySelectorAll('.history-item');
+                const totalPages = Math.ceil(historyItems.length / itemsPerPage);
+                
+                if (totalPagesSpan) totalPagesSpan.textContent = totalPages;
+                
+                function showPage(page) {
+                    const start = (page - 1) * itemsPerPage;
+                    const end = start + itemsPerPage;
+                    
+                    historyItems.forEach((item, index) => {
+                        item.style.display = (index >= start && index < end) ? 'flex' : 'none';
+                    });
+                    
+                    currentPageSpan.textContent = page;
+                    prevPageBtn.disabled = page === 1;
+                    nextPageBtn.disabled = page === totalPages;
+                }
+                
+                // Initial page setup
+                showPage(currentPage);
+                
+                // Event listeners for pagination
+                prevPageBtn.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        showPage(currentPage);
+                    }
+                });
+                
+                nextPageBtn.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        showPage(currentPage);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- At the bottom of your history.html file, before the closing </body> tag -->
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+</body>
+
+</html>

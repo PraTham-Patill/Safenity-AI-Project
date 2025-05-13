@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrimeVision AI - Safety Tools</title>
+
+    <!-- Bootstrap for Styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='safety-tools.css') }}">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div id="particles"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history"><i class="fas fa-history"></i> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="title-text">Safety Tools</h1>
+            <p class="subtitle-text">Personal safety resources, tips, and self-defense assistance</p>
+            <div class="tech-badges">
+                <span class="badge">Self-Defense</span>
+                <span class="badge">Safety Tips</span>
+                <span class="badge">Workshops</span>
+                <span class="badge">Emergency Planning</span>
+            </div>
+        </div>
+
+      
+
+        <!-- Safety Categories -->
+        <div class="safety-categories">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> Safety Resources</h2>
+            
+            <div class="category-grid">
+                <!-- Personal Safety -->
+                <div class="safety-category">
+                    <div class="category-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Personal Safety</h3>
+                    <p>Essential tips and strategies for protecting yourself in various situations</p>
+                    <ul class="resource-list">
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Home Safety Guidelines</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Public Transit Safety</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Traveling Alone</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Nighttime Safety</a></li>
+                    </ul>
+                    <button class="btn-view-all">View All Resources</button>
+                </div>
+                
+                <!-- Self-Defense -->
+                <div class="safety-category">
+                    <div class="category-icon">
+                        <i class="fas fa-fist-raised"></i>
+                    </div>
+                    <h3>Self-Defense</h3>
+                    <p>Learn essential self-defense techniques and awareness strategies</p>
+                    <ul class="resource-list">
+                        <li><a href="#"><i class="fas fa-video"></i> Basic Self-Defense Moves</a></li>
+                        <li><a href="#"><i class="fas fa-video"></i> Situational Awareness</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Finding Local Classes</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Emergency Response</a></li>
+                    </ul>
+                    <button class="btn-view-all">View All Resources</button>
+                </div>
+
+                <!-- Digital Safety -->
+                <div class="safety-category">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-shield"></i>
+                    </div>
+                    <h3>Digital Safety</h3>
+                    <p>Protect your online presence and personal information from threats</p>
+                    <ul class="resource-list">
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Password Management</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Social Media Privacy</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Avoiding Scams</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Secure Browsing</a></li>
+                    </ul>
+                    <button class="btn-view-all">View All Resources</button>
+                </div>
+
+                <!-- Emergency Preparedness -->
+                <div class="safety-category">
+                    <div class="category-icon">
+                        <i class="fas fa-first-aid"></i>
+                    </div>
+                    <h3>Emergency Preparedness</h3>
+                    <p>Be ready for unexpected situations with these emergency planning resources</p>
+                    <ul class="resource-list">
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Emergency Kit Essentials</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Family Emergency Plan</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> First Aid Basics</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Natural Disaster Preparation</a></li>
+                    </ul>
+                    <button class="btn-view-all">View All Resources</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Workshops -->
+        <div class="workshops-section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Upcoming Safety Workshops</h2>
+            
+            <div class="workshops-grid">
+                <div class="workshop-card">
+                    <div class="workshop-date">
+                        <div class="month">APR</div>
+                        <div class="day">15</div>
+                    </div>
+                    <div class="workshop-content">
+                        <h3>Basic Self-Defense Workshop</h3>
+                        <p class="workshop-description">Learn practical self-defense techniques from certified instructors</p>
+                        <div class="workshop-details">
+                            <span><i class="fas fa-map-marker-alt"></i> Community Center, Downtown</span>
+                            <span><i class="fas fa-clock"></i> 5:30 PM - 7:30 PM</span>
+                            <span><i class="fas fa-user-check"></i> Free Entry</span>
+                        </div>
+                        <button class="btn-register">Register Now</button>
+                    </div>
+                </div>
+
+                <div class="workshop-card">
+                    <div class="workshop-date">
+                        <div class="month">APR</div>
+                        <div class="day">22</div>
+                    </div>
+                    <div class="workshop-content">
+                        <h3>Cybersecurity for Beginners</h3>
+                        <p class="workshop-description">Protect your digital presence and avoid online scams</p>
+                        <div class="workshop-details">
+                            <span><i class="fas fa-map-marker-alt"></i> Online Webinar</span>
+                            <span><i class="fas fa-clock"></i> 6:00 PM - 7:30 PM</span>
+                            <span><i class="fas fa-user-check"></i> Free Entry</span>
+                        </div>
+                        <button class="btn-register">Register Now</button>
+                    </div>
+                </div>
+
+                <div class="workshop-card">
+                    <div class="workshop-date">
+                        <div class="month">MAY</div>
+                        <div class="day">05</div>
+                    </div>
+                    <div class="workshop-content">
+                        <h3>Women's Safety Workshop</h3>
+                        <p class="workshop-description">Specialized safety strategies and self-defense techniques for women</p>
+                        <div class="workshop-details">
+                            <span><i class="fas fa-map-marker-alt"></i> Metro Community Hall</span>
+                            <span><i class="fas fa-clock"></i> 4:00 PM - 6:30 PM</span>
+                            <span><i class="fas fa-user-check"></i> Free Entry</span>
+                        </div>
+                        <button class="btn-register">Register Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-more-container">
+                <button class="btn-view-more">View More Workshops <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Safety Check Tool -->
+        <div class="safety-check-section">
+            <h2 class="section-title"><i class="fas fa-clipboard-check"></i> Personal Safety Check</h2>
+            
+            <div class="safety-check-card">
+                <div class="card-header">
+                    <h3>Evaluate Your Safety Preparedness</h3>
+                    <p>Complete this quick assessment to identify areas where you can improve your personal safety</p>
+                </div>
+                
+                <div class="safety-checklist">
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I have emergency contacts saved and easily accessible
+                        </label>
+                    </div>
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I have a basic emergency kit at home
+                        </label>
+                    </div>
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I regularly update my passwords for online accounts
+                        </label>
+                    </div>
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I'm aware of the nearest police station to my home
+                        </label>
+                    </div>
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I have a basic understanding of self-defense techniques
+                        </label>
+                    </div>
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I have a family emergency plan in place
+                        </label>
+                    </div>
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I'm familiar with basic first aid procedures
+                        </label>
+                    </div>
+                    <div class="check-item">
+                        <label class="check-label">
+                            <input type="checkbox" class="form-check-input">
+                            I have privacy settings configured on my social media accounts
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="safety-check-actions">
+                    <button class="btn-evaluate">Evaluate My Safety Preparedness</button>
+                    <a href="#" class="link-detailed-assessment">Take Detailed Assessment</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety App Features -->
+        <div class="safety-app-section">
+            <h2 class="section-title"><i class="fas fa-mobile-alt"></i> Mobile Safety Features</h2>
+            
+            <div class="app-features-grid">
+                <div class="app-feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-location-arrow"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Location Sharing</h3>
+                        <p>Share your real-time location with trusted contacts during your journey</p>
+                        <a href="#" class="btn-setup">Set Up</a>
+                    </div>
+                </div>
+                
+                <div class="app-feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Safety Alerts</h3>
+                        <p>Receive notifications about incidents near your location</p>
+                        <a href="#" class="btn-setup">Set Up</a>
+                    </div>
+                </div>
+                
+                <div class="app-feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Safe Route</h3>
+                        <p>Get directions that avoid high-crime areas based on crime data</p>
+                        <a href="#" class="btn-setup">Set Up</a>
+                    </div>
+                </div>
+                
+                <div class="app-feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Timer Alert</h3>
+                        <p>Set a timer that alerts contacts if you don't check in</p>
+                        <a href="#" class="btn-setup">Set Up</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-download">
+                <p>Download our mobile app for more safety features</p>
+                <div class="download-buttons">
+                    <a href="#" class="btn-app-store"><i class="fab fa-apple"></i> App Store</a>
+                    <a href="#" class="btn-play-store"><i class="fab fa-google-play"></i> Google Play</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-brand">
+                        <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+                    </div>
+                    <p>Making communities safer through technology and awareness</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Important Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="mt-3">Emergency Helpline: <strong>100</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CrimeVision AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Particles.js for background animation -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <!-- Particles.js Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize particles.js
+            particlesJS('particles', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#808080",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrimeVision AI - Settings</title>
+  <!-- Bootstrap for Styling -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Inter:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .settings-container {
+      padding: 20px;
+    }
+
+    .settings-section {
+      margin-bottom: 30px;
+    }
+
+    .settings-section h3 {
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      color: var(--text-color);
+      font-weight: 500;
+    }
+
+    .form-text {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .form-control, .form-select {
+      background-color: rgba(30, 30, 30, 0.8);
+      border: 1px solid rgba(150, 150, 150, 0.2);
+      color: var(--text-color);
+      padding: 12px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+      background-color: rgba(40, 40, 40, 0.8);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.25rem rgba(0, 216, 255, 0.25);
+      color: var(--text-color);
+    }
+
+    .form-check-input {
+      background-color: rgba(30, 30, 30, 0.8);
+      border: 1px solid rgba(150, 150, 150, 0.4);
+    }
+
+    .form-check-input:checked {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 216, 255, 0.3);
+    }
+
+    .btn-save i {
+      margin-right: 8px;
+    }
+
+    .btn-reset {
+      background: linear-gradient(135deg, #555, #333);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .btn-reset i {
+      margin-right: 8px;
+    }
+
+    .settings-card {
+      background-color: rgba(25, 25, 25, 0.6);
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(150, 150, 150, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .settings-card h4 {
+      color: var(--text-color);
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .settings-card p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .theme-option {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .theme-option.active {
+      border-color: var(--accent-color);
+      transform: scale(1.1);
+    }
+
+    .theme-dark {
+      background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    }
+
+    .theme-blue {
+      background: linear-gradient(135deg, #0a1a2a, #1a3a5a);
+    }
+
+    .theme-purple {
+      background: linear-gradient(135deg, #2a0a3a, #4a1a6a);
+    }
+
+    .notification-settings {
+      margin-top: 20px;
+    }
+
+    .account-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .account-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      margin-right: 15px;
+    }
+
+    .account-details h4 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .account-details p {
+      margin: 5px 0 0;
+      color: var(--text-secondary);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background-color: rgba(0, 216, 255, 0.2);
+      color: var(--accent-color);
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="/history"><i class="fas fa-history"></i> History</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1 class="title-text">Settings</h1>
+      <p class="subtitle-text">Customize your CrimeVision AI experience</p>
+      <div class="tech-badges">
+        <span class="badge">User Preferences</span>
+        <span class="badge">Notifications</span>
+        <span class="badge">Account Management</span>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="glass-container">
+      <div class="container-header">
+        <i class="fas fa-cog"></i> System Settings
+      </div>
+
+      <div class="settings-container">
+        <form id="settingsForm">
+          <!-- Account Settings -->
+          <div class="settings-section">
+            <h3><i class="fas fa-user-circle"></i> Account Settings</h3>
+            <div class="settings-card">
+              <div class="account-info">
+                <div class="account-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="account-details">
+                  <h4>Admin User <span class="status-badge">Active</span></h4>
+                  <p>admin@crimevision.ai</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" value="Admin User">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" value="admin@crimevision.ai">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password" class="form-label">Change Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="New password">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Appearance Settings -->
+          <div class="settings-section">
+            <h3><i class="fas fa-palette"></i> Appearance Settings</h3>
+            <div class="settings-card">
+              <h4>Theme Selection</h4>
+              <p>Choose a theme for your CrimeVision AI interface</p>
+              <div>
+                <div class="theme-option theme-dark active" data-theme="dark" title="Dark Theme"></div>
+                <div class="theme-option theme-blue" data-theme="blue" title="Blue Theme"></div>
+                <div class="theme-option theme-purple" data-theme="purple" title="Purple Theme"></div>
+              </div>
+              <div class="form-check mt-4">
+                <input class="form-check-input" type="checkbox" id="animationsToggle" checked>
+                <label class="form-check-label" for="animationsToggle">
+                  Enable background animations
+                </label>
+                <div class="form-text">Disable for better performance on low-end devices</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notification Settings -->
+          <div class="settings-section">
+            <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+            <div class="settings-card">
+              <h4>Alert Preferences</h4>
+              <p>Configure how you want to be notified about crime detections</p>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="emailAlerts" checked>
+                <label class="form-check-label" for="emailAlerts">
+                  Email Alerts
+                </label>
+                <div class="form-text">Receive email notifications for critical detections</div>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="smsAlerts" checked>
+                <label class="form-check-label" for="smsAlerts">
+                  SMS Alerts
+                </label>
+                <div class="form-text">Receive text messages for urgent crime detections</div>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="pushNotifications">
+                <label class="form-check-label" for="pushNotifications">
+                  Push Notifications
+                </label>
+                <div class="form-text">Receive browser notifications when online</div>
+              </div>
+              <div class="form-group mt-4">
+                <label for="phoneNumber" class="form-label">Alert Phone Number</label>
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="+1 (555) 123-4567">
+                <div class="form-text">Used for SMS alerts and emergency contacts</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- System Settings -->
+          <div class="settings-section">
+            <h3><i class="fas fa-sliders-h"></i> System Settings</h3>
+            <div class="settings-card">
+              <h4>Detection Sensitivity</h4>
+              <p>Adjust the sensitivity of the crime detection algorithms</p>
+              <div class="form-group">
+                <label for="sensitivityRange" class="form-label">Detection Threshold: <span id="sensitivityValue">75%</span></label>
+                <input type="range" class="form-range" min="50" max="95" step="5" value="75" id="sensitivityRange">
+                <div class="form-text">Higher values reduce false positives but may miss some incidents</div>
+              </div>
+              <div class="form-group mt-4">
+                <label for="storageLimit" class="form-label">Video Storage Limit</label>
+                <select class="form-select" id="storageLimit">
+                  <option value="7">7 days</option>
+                  <option value="14">14 days</option>
+                  <option value="30" selected>30 days</option>
+                  <option value="90">90 days</option>
+                  <option value="365">1 year</option>
+                </select>
+                <div class="form-text">Recordings older than this will be automatically deleted</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Privacy Settings -->
+          <div class="settings-section">
+            <h3><i class="fas fa-lock"></i> Privacy Settings</h3>
+            <div class="settings-card">
+              <h4>Data Collection</h4>
+              <p>Manage how your data is collected and used</p>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="analyticsConsent" checked>
+                <label class="form-check-label" for="analyticsConsent">
+                  Allow anonymous usage statistics
+                </label>
+                <div class="form-text">Help us improve by sharing anonymous system performance data</div>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="faceRecognition" checked>
+                <label class="form-check-label" for="faceRecognition">
+                  Enable face recognition
+                </label>
+                <div class="form-text">Use facial recognition to identify suspects in recordings</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="d-flex justify-content-between mt-4 mb-3">
+            <button type="button" class="btn-reset">
+              <i class="fas fa-undo"></i> Reset to Defaults
+            </button>
+            <button type="submit" class="btn-save">
+              <i class="fas fa-save"></i> Save Settings
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>CrimeVision<span class="text-highlight">AI</span></h4>
+        <p>Next generation AI-powered crime detection and prevention system. Enhancing public safety through
+          cutting-edge technology.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Integration</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p><i class="fas fa-envelope"></i> support@crimevision.ai</p>
+        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+        <p><i class="fas fa-map-marker-alt"></i> New York, NY 10001</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 CrimeVision AI. All rights reserved. | <span class="certified-text">FCC Certified Technology</span></p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Theme selection functionality
+      const themeOptions = document.querySelectorAll('.theme-option');
+      themeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove active class from all options
+          themeOptions.forEach(opt => opt.classList.remove('active'));
+          // Add active class to clicked option
+          this.classList.add('active');
+          // Here you would apply the theme (in a real implementation)
+          const selectedTheme = this.getAttribute('data-theme');
+          console.log('Selected theme:', selectedTheme);
+          // Save to localStorage or send to server in a real implementation
+        });
+      });
+
+      // Sensitivity range display
+      const sensitivityRange = document.getElementById('sensitivityRange');
+      const sensitivityValue = document.getElementById('sensitivityValue');
+      if (sensitivityRange && sensitivityValue) {
+        sensitivityRange.addEventListener('input', function() {
+          sensitivityValue.textContent = this.value + '%';
+        });
+      }
+
+      // Form submission
+      const settingsForm = document.getElementById('settingsForm');
+      if (settingsForm) {
+        settingsForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          // Show a success message
+          alert('Settings saved successfully!');
+          // In a real implementation, you would send the form data to the server
+        });
+      }
+    });
+  </script>
+
+  <!-- Particles.js for background animation -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  
+  <!-- Particles.js Initialization -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize particles.js
+      particlesJS('particles', {
+        "particles": {
+          "number": {
+            "value": 80,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#ffffff"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+          },
+          "opacity": {
+            "value": 0.3,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#808080",
+            "opacity": 0.2,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "grab"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": {
+                "opacity": 0.5
+              }
+            },
+            "push": {
+              "particles_nb": 4
+            }
+          }
+        },
+        "retina_detect": true
+      });
+    });
+  </script>
+</body>
+
+</html>

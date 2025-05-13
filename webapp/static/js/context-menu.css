@@ -1,0 +1,47 @@
+/* Context Menu Styling */
+.context-menu {
+    position: absolute;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    padding: 8px 0;
+    min-width: 180px;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.context-menu-item {
+    padding: 10px 15px;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.context-menu-item:hover {
+    background: rgba(0, 216, 255, 0.2);
+}
+
+.context-menu-item i {
+    margin-right: 10px;
+    color: var(--accent-color, #00d8ff);
+    width: 16px;
+    text-align: center;
+}
+
+.delete-contact i {
+    color: #ff5555;
+}
+
+.delete-contact:hover {
+    background: rgba(255, 85, 85, 0.2);
+}

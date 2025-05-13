@@ -1,0 +1,585 @@
+/* ===== CYBERSECURITY SPECIFIC STYLES ===== */
+
+.cybersecurity-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* Alert Banner */
+.alert-banner {
+    display: flex;
+    align-items: center;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    background: rgba(255, 60, 0, 0.15);
+    border: 1px solid rgba(255, 60, 0, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.warning-alert {
+    background: rgba(255, 60, 0, 0.15);
+    border: 1px solid rgba(255, 60, 0, 0.3);
+}
+
+.alert-icon {
+    font-size: 2.5rem;
+    color: #ff5500;
+    margin-right: 20px;
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #ff5500;
+}
+
+.alert-content p {
+    margin-bottom: 0;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.btn-details {
+    background-color: rgba(255, 85, 0, 0.2);
+    border: 1px solid rgba(255, 85, 0, 0.3);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.btn-details:hover {
+    background-color: rgba(255, 85, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Cyber Scanner Styles */
+.cyber-scanner-content {
+    padding: 25px;
+}
+
+.scanner-description {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.scanner-description p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.scanner-input-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 700px;
+    position: relative;
+}
+
+.scanner-input {
+    width: 100%;
+    padding: 16px 20px;
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid rgba(150, 150, 150, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.scanner-input:focus {
+    background-color: rgba(40, 40, 40, 0.8);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 216, 255, 0.25);
+    outline: none;
+}
+
+.btn-scan {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-scan:hover {
+    background: linear-gradient(135deg, #00e0ff, var(--accent-color));
+    transform: translateY(-2px);
+}
+
+.scan-examples {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.scan-examples span {
+    color: var(--accent-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.scan-examples span:hover {
+    text-decoration: underline;
+}
+
+/* Resources Grid */
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.resource-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px var(--glass-shadow);
+}
+
+.resource-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.resource-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: white;
+    text-align: center;
+}
+
+.resource-card p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.resource-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.resource-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.1);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    position: relative;
+    padding-left: 25px;
+}
+
+.resource-list li:before {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.resource-list li:last-child {
+    border-bottom: none;
+}
+
+.btn-resource {
+    display: block;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-resource:hover {
+    background: linear-gradient(135deg, #00e0ff, var(--accent-color));
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Threat Map Styles */
+.threat-map-container {
+    padding: 25px;
+}
+
+.threat-map-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-item {
+    background-color: rgba(25, 25, 25, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(150, 150, 150, 0.1);
+}
+
+.stat-item h4 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.stat-trend {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.stat-trend.positive {
+    color: #00cc66;
+}
+
+.stat-trend.negative {
+    color: #ff3333;
+}
+
+.map-container {
+    background-color: rgba(25, 25, 25, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(150, 150, 150, 0.1);
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.map-placeholder {
+    text-align: center;
+}
+
+.map-placeholder i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.map-placeholder p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.map-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Education Section */
+.education-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, var(--platinum), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.section-title p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.video-resources {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.video-card {
+    background-color: rgba(25, 25, 25, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.video-thumbnail {
+    height: 180px;
+    background-color: rgba(20, 20, 20, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.video-thumbnail i {
+    font-size: 3rem;
+    color: white;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.video-card:hover .video-thumbnail i {
+    color: var(--accent-color);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.video-time {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.video-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.upcoming-workshops {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+}
+
+.upcoming-workshops h3 {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.workshop-item {
+    display: flex;
+    margin-bottom: 25px;
+    background-color: rgba(30, 30, 30, 0.6);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.workshop-item:last-child {
+    margin-bottom: 0;
+}
+
+.workshop-date {
+    background: linear-gradient(to bottom, var(--accent-color), var(--accent-secondary));
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: 700;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    line-height: 1.2;
+}
+
+.workshop-info {
+    padding: 20px;
+    flex: 1;
+}
+
+.workshop-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.workshop-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.workshop-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.workshop-link:hover {
+    color: #00e0ff;
+    transform: translateX(5px);
+}
+
+/* Assessment Tool Section */
+.assessment-tool-section {
+    background: linear-gradient(135deg, rgba(0, 216, 255, 0.1), rgba(0, 160, 233, 0.1));
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 60px;
+    border: 1px solid rgba(0, 216, 255, 0.2);
+}
+
+.assessment-header {
+    margin-bottom: 30px;
+}
+
+.assessment-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.assessment-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.btn-assessment {
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+    color: white;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 216, 255, 0.3);
+}
+
+.btn-assessment i {
+    margin-right: 10px;
+}
+
+.btn-assessment:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 216, 255, 0.4);
+    color: white;
+    background: linear-gradient(135deg, #00e0ff, var(--accent-color));
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .alert-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .alert-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .alert-content {
+        margin-bottom: 20px;
+    }
+    
+    .workshop-item {
+        flex-direction: column;
+    }
+    
+    .workshop-date {
+        padding: 10px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .assessment-tool-section {
+        padding: 30px 20px;
+    }
+}

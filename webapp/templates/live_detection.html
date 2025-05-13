@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Crime Detection - CrimeVision AI</title>
+
+    <!-- Bootstrap for Styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        .video-container {
+            position: relative;
+            margin: 30px auto;
+            max-width: 900px;
+        }
+        
+        .video-feed {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .status-bar {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .normal {
+            background-color: rgba(212, 237, 218, 0.9);
+            color: #155724;
+        }
+        
+        .crime {
+            background-color: rgba(248, 215, 218, 0.9);
+            color: #721c24;
+            animation: flash 1s infinite;
+            box-shadow: 0 5px 20px rgba(220, 53, 69, 0.5);
+        }
+        
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .detection-controls {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .alert-history {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+        }
+        
+        .alert-item {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .alert-item.warning {
+            background-color: rgba(255, 193, 7, 0.2);
+        }
+        
+        .alert-item.danger {
+            background-color: rgba(220, 53, 69, 0.2);
+        }
+
+        .report-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-report {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-report i {
+            margin-right: 8px;
+        }
+
+        .btn-report:hover {
+            background: linear-gradient(135deg, #c82333, #bd2130);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(220, 53, 69, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div id="particles"></div>
+    </div>
+    
+    <div class="bg-animation">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history"><i class="fas fa-history"></i> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="title-text">Live Crime Detection</h1>
+            <p class="subtitle-text">Real-time monitoring and threat assessment</p>
+            <div class="tech-badges">
+                <span class="badge">Live Analysis</span>
+                <span class="badge">Instant Alerts</span>
+                <span class="badge">24/7 Monitoring</span>
+                <span class="badge">AI-Powered</span>
+            </div>
+        </div>
+        
+        <div class="glass-container">
+            <div class="container-header">
+                <i class="fas fa-video"></i> Live Surveillance Feed
+            </div>
+            
+            <div class="video-container">
+                <img src="{{ url_for('video_feed') }}" class="video-feed">
+                <div id="status-message" class="status-bar normal">
+                    <i class="fas fa-shield-alt"></i> Monitoring - No Crime Detected
+                </div>
+            </div>
+
+            <!-- Report Incident Button (Centered below video) -->
+            <div class="report-btn-container">
+                <button id="reportIncident" class="btn-report" data-bs-toggle="modal" data-bs-target="#incidentReportModal">
+                    <i class="fas fa-exclamation-triangle"></i> Report Incident
+                </button>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="detection-controls">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Alert History</h5>
+                        <div class="alert-history" id="alertHistory">
+                            <div class="alert-item">
+                                <i class="fas fa-info-circle"></i> System started monitoring (<span id="time-elapsed">00:00:00</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/" class="btn btn-primary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <button id="exportReport" class="btn btn-success btn-lg">
+                    <i class="fas fa-file-export"></i> Export Report
+                </button>
+            </div>
+            
+            <!-- Incident Report Modal -->
+            <div class="modal fade" id="incidentReportModal" tabindex="-1" aria-labelledby="incidentReportModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="incidentReportModalLabel">Report Incident</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="incidentReportForm" action="/report-incident" method="post">
+                                <div class="mb-3">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phoneNumber" name="phone_number" placeholder="+1234567890" required>
+                                    <div class="form-text">Enter phone number with country code (e.g., +1 for US)</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="incidentMessage" class="form-label">Incident Description</label>
+                                    <textarea class="form-control" id="incidentMessage" name="incident_message" rows="4" placeholder="Describe the incident you're reporting..." required></textarea>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="emergencyAlert" name="emergency_alert">
+                                    <label class="form-check-label" for="emergencyAlert">Mark as Emergency</label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" id="submitIncidentReport">Send Alert</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>CrimeVision<span class="text-highlight">AI</span></h4>
+                <p>Next generation AI-powered crime detection and prevention system. Enhancing public safety through
+                    cutting-edge technology.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Integration</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> support@crimevision.ai</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> New York, NY 10001</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CrimeVision AI. All rights reserved. | <span class="certified-text">FCC Certified
+                    Technology</span></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Particles.js for background animation -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+        // Update timer
+        let seconds = 0;
+        const timeElapsed = document.getElementById('time-elapsed');
+        
+        setInterval(() => {
+            seconds++;
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const remainingSeconds = seconds % 60;
+            timeElapsed.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }, 1000);
+        
+        // Incident Report Form Handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitIncidentBtn = document.getElementById('submitIncidentReport');
+            const incidentForm = document.getElementById('incidentReportForm');
+            
+            if (submitIncidentBtn && incidentForm) {
+                submitIncidentBtn.addEventListener('click', function() {
+                    // Validate form
+                    const phoneNumber = document.getElementById('phoneNumber').value;
+                    const incidentMessage = document.getElementById('incidentMessage').value;
+                    
+                    if (!phoneNumber || !incidentMessage) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    // Submit form via fetch API
+                    const formData = new FormData(incidentForm);
+                    
+                    fetch('/report-incident', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Close modal and show success message
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('incidentReportModal'));
+                            modal.hide();
+                            
+                            // Add alert to the page
+                            const alertHistory = document.getElementById('alertHistory');
+                            const alertItem = document.createElement('div');
+                            alertItem.className = 'alert-item danger';
+                            alertItem.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Incident reported: ${incidentMessage.substring(0, 30)}... (${timeElapsed.textContent})`;
+                            alertHistory.prepend(alertItem);
+                            
+                            // Show success notification
+                            alert('Incident report sent successfully!');
+                        } else {
+                            alert('Error sending incident report: ' + (data.error || 'Unknown error'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error sending incident report. Please try again.');
+                    });
+                });
+            }
+        });
+        
+        // Video analysis for crime detection
+        const videoFeed = document.querySelector('.video-feed');
+        const statusMessage = document.getElementById('status-message');
+        const alertHistory = document.getElementById('alertHistory');
+        
+        // Create canvas for video frame analysis
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Check for crime detection
+        setInterval(() => {
+            canvas.width = videoFeed.width;
+            canvas.height = videoFeed.height;
+            ctx.drawImage(videoFeed, 0, 0, canvas.width, canvas.height);
+            
+            // Check if a crime is detected (red border)
+            const pixelData = ctx.getImageData(5, 5, 1, 1).data;
+            
+            if (pixelData[0] > 200 && pixelData[1] < 50 && pixelData[2] < 50) {
+                statusMessage.className = 'status-bar crime';
+                statusMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ALERT: Crime Activity Detected!';
+                
+                // Add to alert history if we detect a crime
+                const alertItem = document.createElement('div');
+                alertItem.className = 'alert-item danger';
+                alertItem.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Crime activity detected (${timeElapsed.textContent})`;
+                alertHistory.prepend(alertItem);
+            } else {
+                statusMessage.className = 'status-bar normal';
+                statusMessage.innerHTML = '<i class="fas fa-shield-alt"></i> Monitoring - No Crime Detected';
+            }
+        }, 2000);
+        
+        // Handle export report button
+        const exportReportBtn = document.getElementById('exportReport');
+        exportReportBtn.addEventListener('click', function() {
+            alert("Generating surveillance report. The report will be available for download shortly.");
+            // In a real application, this would generate and download a PDF report
+        });
+    </script>
+
+    <!-- Particles.js Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize particles.js
+            particlesJS('particles', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#808080",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Initialize particles.js for stars
+            particlesJS('stars', {
+                "particles": {
+                    "number": {
+                        "value": 50,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 2,
+                        "random": true,
+                    },
+                    "line_linked": {
+                        "enable": false
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 0.5,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "bubble"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "bubble": {
+                            "distance": 100,
+                            "size": 4,
+                            "duration": 2,
+                            "opacity": 0.8,
+                            "speed": 3
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrimeVision AI - Detection Results</title>
+  <!-- Bootstrap for Styling -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <!-- HTML2PDF Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+</head>
+
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/history"><i class="fas fa-history"></i> History</a></li>
+          <li class="nav-item"><a class="nav-link" href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1 class="title-text">Detection Results</h1>
+      <p class="subtitle-text">AI-Powered Crime Analysis Complete</p>
+      <div class="tech-badges">
+        <span class="badge">Analysis Complete</span>
+        <span class="badge">AI Verified</span>
+        <span class="badge">Secure Report</span>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="glass-container">
+      <div class="container-header">
+        <i class="fas fa-clipboard-check"></i> Analysis Results
+      </div>
+
+      {% if error %}
+      <div class="error-container">
+        <div class="error-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3 class="error-title">Analysis Error</h3>
+        <p class="error-message">{{ error }}</p>
+        <a href="/" class="btn-back"><i class="fas fa-arrow-left"></i> Return to Scanner</a>
+      </div>
+      {% else %}
+      <div class="result-content">
+        <!-- Modify the result page to better display crime type -->
+
+        <!-- Find this section in your result.html file and replace it -->
+        <div class="result-header-card">
+          <div class="alert-badge {% if crime_label != 'Normal Videos' %}crime-badge{% else %}normal-badge{% endif %}">
+            <i
+              class="fas {% if crime_label != 'Normal Videos' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i>
+            {% if crime_label != 'Normal Videos' %}Crime Detected: {{ crime_label }}{% else %}No Crime Detected{% endif
+            %}
+          </div>
+
+          <!-- Enhanced crime information section with improved UI -->
+          {% if crime_label != 'Normal Videos' %}
+          <div class="crime-details">
+            <div class="crime-info-card">
+              <div class="crime-info-header">Crime Analysis Results</div>
+              <div class="crime-info-content">
+                <div class="crime-type">
+                  <div class="info-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                  <div class="info-content">
+                    <span class="label">Type of Crime:</span>
+                    <span class="value">{{ crime_label }}</span>
+                  </div>
+                </div>
+                <div class="crime-confidence">
+                  <div class="info-icon"><i class="fas fa-chart-pie"></i></div>
+                  <div class="info-content">
+                    <span class="label">Confidence:</span>
+                    <div class="confidence-meter">
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ confidence }}%" aria-valuenow="{{ confidence }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <span class="value">{{ confidence }}%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="crime-severity">
+                  <div class="info-icon"><i class="fas fa-exclamation-circle"></i></div>
+                  <div class="info-content">
+                    <span class="label">Severity:</span>
+                    <span class="value severity-badge severity-{% if crime_class in [0, 1, 3] %}high{% elif crime_class in [2, 4] %}medium{% else %}low{% endif %}">
+                      {% if crime_class in [0, 1, 3] %}High{% elif crime_class in [2, 4] %}Medium{% else %}Low{% endif %}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if crime_label != 'Normal Videos' and sms_sent %}
+          <div class="alert-sent">
+            <i class="fas fa-bell"></i> Alert notification sent to security personnel
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Add this CSS to your <style> section in the result.html file -->
+        <style>
+          .crime-details {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(25, 25, 25, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid #ff3b30;
+          }
+
+          .crime-type,
+          .crime-confidence,
+          .crime-severity {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .crime-type .label,
+          .crime-confidence .label,
+          .crime-severity .label {
+            font-weight: bold;
+            color: #aaa;
+          }
+
+          .crime-type .value {
+            color: #ff3b30;
+            font-weight: bold;
+            font-size: 1.1em;
+          }
+
+          .crime-confidence .value {
+            color: #00d8ff;
+          }
+
+          .crime-severity .value {
+            color: #ff9500;
+          }
+        </style>
+        <div class="evidence-section">
+          <div class="section-header">
+            <i class="fas fa-camera"></i> Evidence & Suspect Images
+          </div>
+          <div class="evidence-display">
+            <!-- Uploaded File -->
+            <h5>Uploaded Evidence</h5>
+            
+            <!-- Enhanced Video Player for uploaded video -->
+            <div class="video-player-container">
+              <video id="evidenceVideo" class="evidence-video">
+                <source src="{{ url_for('uploaded_file', filename=file_path) }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-progress">
+                <div class="video-progress-filled"></div>
+              </div>
+              <div class="video-time">0:00 / 0:00</div>
+              <div class="video-controls">
+                <button id="playPauseBtn" class="video-control-btn"><i class="fas fa-play"></i></button>
+                <button id="restartBtn" class="video-control-btn"><i class="fas fa-redo"></i></button>
+                <button id="muteBtn" class="video-control-btn"><i class="fas fa-volume-up"></i></button>
+                <button id="fullscreenBtn" class="video-control-btn"><i class="fas fa-expand"></i></button>
+              </div>
+            </div>
+            
+            <div class="image-metadata">
+              <div class="metadata-item">
+                <span class="metadata-label"><i class="fas fa-file"></i> File:</span>
+                <span class="metadata-value">{{ file_path }}</span>
+              </div>
+              <div class="metadata-item">
+                <span class="metadata-label"><i class="fas fa-calendar"></i> Processed:</span>
+                <span class="metadata-value">{{ timestamp }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weapon Detection Alert -->
+        <div class="weapon-alert"
+          style="{% if not weapon_detected %}background-color: rgba(46, 204, 113, 0.2); border: 1px solid rgba(46, 204, 113, 0.5);{% endif %}">
+          <div class="weapon-icon"
+            style="{% if not weapon_detected %}background-color: rgba(46, 204, 113, 0.8);{% endif %}">
+            <i class="fas {% if weapon_detected %}fa-exclamation-triangle{% else %}fa-check{% endif %}"></i>
+          </div>
+          <div class="weapon-text">
+            {% if weapon_detected %}
+            <strong>Warning:</strong> Potential weapon detected in the footage. Security personnel have been notified.
+            {% else %}
+            <strong>Status:</strong> No weapons detected in the footage.
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Suspect Faces Section - renamed to "Suspicious Evidence" -->
+        {% if crime_label != 'Normal Videos' %}
+        <div class="suspect-header">
+          <i class="fas fa-user-secret"></i> Suspicious Evidence
+        </div>
+
+        <!-- Find this section and replace it -->
+        {% if suspect_faces|length > 0 %}
+        <div class="suspect-gallery">
+          {% for face in suspect_faces %}
+          <div class="suspect-card">
+            <div class="suspect-number">Evidence #{{ loop.index }}</div>
+            <img src="{{ url_for('suspect_file', filename=face) }}" alt="Evidence #{{ loop.index }}"
+              class="suspect-image">
+            <div class="suspect-details">
+              <p class="suspect-id">ID: SCN-{{ face.split('_')[0] }}</p>
+              <p class="suspect-match">Match confidence: Medium</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-suspects-container">
+          <div class="no-suspects-icon">
+            <i class="fas fa-user-slash"></i>
+          </div>
+          <p class="no-suspects">No clear suspicious evidence was detected in this footage. The crime may have occurred
+            with subjects not visible or identifiable in the frame.</p>
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <a href="/" class="btn-action">
+            <i class="fas fa-arrow-left"></i> Back to Scanner
+          </a>
+          <button id="saveReportBtn" class="btn-action btn-primary">
+            <i class="fas fa-save"></i> Save Report
+          </button>
+          {% if crime_label != 'Normal Videos' %}
+          <button type="button" class="btn-action btn-danger" data-bs-toggle="modal" data-bs-target="#reportModal">
+            <i class="fas fa-exclamation-triangle"></i> Report Incident
+          </button>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Additional Info Section -->
+    <div class="glass-container mt-4">
+      <div class="container-header">
+        <i class="fas fa-info-circle"></i> Additional Information
+      </div>
+      <div class="additional-info">
+        <p class="info-text">
+          This analysis was performed using CrimeVision AI's advanced neural network trained on the UCF Crime Dataset.
+          The system detects various types of criminal activities with varying levels of confidence.
+        </p>
+        <p class="info-text">
+          {% if crime_label != 'Normal Videos' %}
+          <strong>What to do next:</strong> Review the evidence thoroughly and consider reporting this incident
+          to the appropriate authorities if it hasn't been done automatically.
+          {% else %}
+          <strong>What to do next:</strong> No crime was detected in this footage. You can safely archive this report
+          or continue monitoring if this is part of ongoing surveillance.
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Incident Modal -->
+  <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportModalLabel">Report Incident</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Enter the phone number to send an incident report:</p>
+          <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phoneNumber" placeholder="+1 (555) 123-4567">
+            <small class="text-muted">Format: +1 (555) 123-4567</small>
+          </div>
+          <div class="mb-3">
+            <label for="additionalDetails" class="form-label">Additional Details (Optional)</label>
+            <textarea class="form-control" id="additionalDetails" rows="3"
+              placeholder="Add any additional context or notes about this incident..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal btn-modal-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-modal btn-modal-primary" id="sendReportBtn">Send Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Success</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-4">
+            <i class="fas fa-check-circle" style="font-size: 3rem; color: #2ecc71;"></i>
+          </div>
+          <p id="successMessage" class="text-center">Operation completed successfully!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-modal btn-modal-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>CrimeVision<span class="text-highlight">AI</span></h4>
+        <p>Next generation AI-powered crime detection and prevention system. Enhancing public safety through
+          cutting-edge technology.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Integration</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p><i class="fas fa-envelope"></i> support@crimevision.ai</p>
+        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+        <p><i class="fas fa-map-marker-alt"></i> New York, NY 10001</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 CrimeVision AI. All rights reserved. | <span class="certified-text">FCC Certified Technology</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Particles.js for background animation -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script>
+    // Enhanced Video Player Controls
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.getElementById('evidenceVideo');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const restartBtn = document.getElementById('restartBtn');
+      const muteBtn = document.getElementById('muteBtn');
+      const fullscreenBtn = document.getElementById('fullscreenBtn');
+      const progressBar = document.querySelector('.video-progress-filled');
+      const progressContainer = document.querySelector('.video-progress');
+      const timeDisplay = document.querySelector('.video-time');
+      
+      if (video) {
+        // Play/Pause button
+        playPauseBtn.addEventListener('click', function() {
+          if (video.paused) {
+            video.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          } else {
+            video.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+          }
+        });
+        
+        // Click on video to play/pause
+        video.addEventListener('click', function() {
+          if (video.paused) {
+            video.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          } else {
+            video.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+          }
+        });
+        
+        // Restart button
+        restartBtn.addEventListener('click', function() {
+          video.currentTime = 0;
+          if (video.paused) {
+            video.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          }
+        });
+        
+        // Mute button
+        muteBtn.addEventListener('click', function() {
+          video.muted = !video.muted;
+          if (video.muted) {
+            muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+          } else {
+            muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+          }
+        });
+        
+        // Fullscreen button
+        fullscreenBtn.addEventListener('click', function() {
+          if (video.requestFullscreen) {
+            video.requestFullscreen();
+          } else if (video.webkitRequestFullscreen) { /* Safari */
+            video.webkitRequestFullscreen();
+          } else if (video.msRequestFullscreen) { /* IE11 */
+            video.msRequestFullscreen();
+          }
+        });
+        
+        // Update progress bar
+        video.addEventListener('timeupdate', function() {
+          // Update progress bar
+          const percent = (video.currentTime / video.duration) * 100;
+          progressBar.style.width = `${percent}%`;
+          
+          // Update time display
+          const currentMinutes = Math.floor(video.currentTime / 60);
+          const currentSeconds = Math.floor(video.currentTime % 60);
+          const durationMinutes = Math.floor(video.duration / 60) || 0;
+          const durationSeconds = Math.floor(video.duration % 60) || 0;
+          
+          timeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds} / ${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+        });
+        
+        // Click on progress bar to seek
+        progressContainer.addEventListener('click', function(e) {
+          const progressTime = (e.offsetX / progressContainer.offsetWidth) * video.duration;
+          video.currentTime = progressTime;
+        });
+        
+        // Update play/pause button when video ends
+        video.addEventListener('ended', function() {
+          playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+      }
+    });
+    
+    // Save Report Functionality (Updated to generate PDF)
+    document.getElementById('saveReportBtn').addEventListener('click', function () {
+      // Create PDF from the entire page
+      const element = document.body;
+      const opt = {
+        margin: 10,
+        filename: `crime_report_${new Date().toISOString().slice(0, 10)}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      // Show loading message
+      document.getElementById('successMessage').textContent = "Generating PDF...";
+      const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+      successModal.show();
+
+      // Generate and save PDF
+      html2pdf().set(opt).from(element).save().then(() => {
+        // Update success message when PDF is generated
+        document.getElementById('successMessage').textContent = "Report saved as PDF successfully!";
+      });
+    });
+
+    // Automatically populate report details in the incident report modal
+    document.getElementById('reportModal').addEventListener('show.bs.modal', function (event) {
+      // Generate report text
+      const reportText = `
+Crime Report generated on {{ timestamp }}
+-------------------------------------------
+Detection: {% if crime_label != 'Normal Videos' %}Crime Detected{% else %}No Crime Detected{% endif %}
+Confidence: {{ confidence }}%
+Weapon Detected: {{ weapon_detected }}
+Suspicious Evidence: {{ suspect_faces|length }} item(s)
+File: {{ file_path }}
+-------------------------------------------
+`;
+
+      // Pre-fill the textarea with the report information
+      document.getElementById('additionalDetails').value = reportText;
+    });
+
+    // Send Incident Report Functionality
+    document.getElementById('sendReportBtn').addEventListener('click', function () {
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      const additionalDetails = document.getElementById('additionalDetails').value;
+
+      // Validate phone number (basic validation)
+      if (!phoneNumber) {
+        alert("Please enter a valid phone number");
+        return;
+      }
+
+      // Create form data for submission
+      const formData = new FormData();
+      formData.append('phone_number', phoneNumber);
+      formData.append('incident_message', additionalDetails || "No additional details provided");
+      formData.append('crime_label', "{{ crime_label }}");
+      formData.append('confidence', "{{ confidence }}");
+      formData.append('weapon_detected', "{{ 'Yes' if weapon_detected else 'No' }}");
+      formData.append('suspect_count', "{{ suspect_faces|length }}");
+      
+      // Send the data to the report-incident endpoint
+      fetch('/report-incident', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Hide the report modal
+          const reportModal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
+          reportModal.hide();
+
+          if (data.success) {
+            // Show success modal
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            document.getElementById('successMessage').textContent = `Incident report sent to ${phoneNumber} successfully!`;
+            successModal.show();
+          } else {
+            // Show error
+            alert(`Error: ${data.error || 'Failed to send report'}`);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while sending the report. Please try again.');
+        });
+    });
+  </script>
+
+  <!-- Particles.js Initialization for stars animation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize particles.js for stars
+      particlesJS('stars', {
+        "particles": {
+          "number": {
+            "value": 50,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#ffffff"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+          },
+          "opacity": {
+            "value": 0.3,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 2,
+            "random": true,
+          },
+          "line_linked": {
+            "enable": false
+          },
+          "move": {
+            "enable": true,
+            "speed": 0.5,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "bubble"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "bubble": {
+              "distance": 100,
+              "size": 4,
+              "duration": 2,
+              "opacity": 0.8,
+              "speed": 3
+            },
+            "push": {
+              "particles_nb": 4
+            }
+          }
+        },
+        "retina_detect": true
+      });
+
+      // Initialize particles.js for stars2 with different settings
+      particlesJS('stars2', {
+        "particles": {
+          "number": {
+            "value": 30,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#ffffff"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+          },
+          "opacity": {
+            "value": 0.4,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 0.7,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+          },
+          "line_linked": {
+            "enable": false
+          },
+          "move": {
+            "enable": true,
+            "speed": 0.3,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "bubble"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "bubble": {
+              "distance": 100,
+              "size": 4,
+              "duration": 2,
+              "opacity": 0.8,
+              "speed": 3
+            },
+            "push": {
+              "particles_nb": 4
+            }
+          }
+        },
+        "retina_detect": true
+      });
+
+      // Initialize particles.js for stars3 with different settings
+      particlesJS('stars3', {
+        "particles": {
+          "number": {
+            "value": 15,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#ffffff"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 0.5,
+              "opacity_min": 0.2,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 4,
+            "random": true,
+          },
+          "line_linked": {
+            "enable": false
+          },
+          "move": {
+            "enable": true,
+            "speed": 0.2,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "bubble"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "bubble": {
+              "distance": 100,
+              "size": 5,
+              "duration": 2,
+              "opacity": 0.8,
+              "speed": 3
+            },
+            "push": {
+              "particles_nb": 4
+            }
+          }
+        },
+        "retina_detect": true
+      });
+    });
+  </script>
+</body>
+
+</html>

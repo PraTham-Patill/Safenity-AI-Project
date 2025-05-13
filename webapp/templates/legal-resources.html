@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrimeVision AI - Legal Resources</title>
+
+    <!-- Bootstrap for Styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='legal-resources.css') }}">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div id="particles"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history"><i class="fas fa-history"></i> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container legal-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="title-text">Legal Resources</h1>
+            <p class="subtitle-text">Access essential legal information, services, and support</p>
+            <div class="tech-badges">
+                <span class="badge">Free Legal Aid</span>
+                <span class="badge">Know Your Rights</span>
+                <span class="badge">Document Templates</span>
+                <span class="badge">Legal Consultations</span>
+            </div>
+        </div>
+
+
+        <!-- Quick Actions -->
+        <div class="quick-actions-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+            </div>
+            <div class="quick-actions-grid">
+                <a href="#free-legal-aid" class="action-card">
+                    <div class="card-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="card-title">Find Free Legal Aid</div>
+                </a>
+                <a href="#know-your-rights" class="action-card">
+                    <div class="card-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="card-title">Know Your Rights</div>
+                </a>
+                <a href="#document-templates" class="action-card">
+                    <div class="card-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="card-title">Document Templates</div>
+                </a>
+                <a href="#legal-consultation" class="action-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="card-title">Legal Consultation</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Free Legal Aid Section -->
+        <div id="free-legal-aid" class="resource-section">
+            <div class="section-header">
+                <h2><i class="fas fa-balance-scale"></i> Free Legal Aid</h2>
+            </div>
+            <div class="resource-content">
+                <p class="resource-description">
+                    Access free legal assistance from qualified professionals. Our network of pro bono lawyers and legal aid organizations can help you with various legal matters.
+                </p>
+                
+                <div class="legal-aid-cards">
+                    <div class="aid-card">
+                        <div class="aid-card-header">
+                            <i class="fas fa-university"></i>
+                            <h3>Legal Aid Society</h3>
+                        </div>
+                        <div class="aid-card-body">
+                            <p>Provides free legal services to low-income individuals and families.</p>
+                            <ul class="aid-services">
+                                <li><i class="fas fa-check"></i> Criminal Defense</li>
+                                <li><i class="fas fa-check"></i> Housing Issues</li>
+                                <li><i class="fas fa-check"></i> Family Law</li>
+                                <li><i class="fas fa-check"></i> Consumer Protection</li>
+                            </ul>
+                            <div class="aid-contact">
+                                <div><i class="fas fa-phone"></i> (800) 123-4567</div>
+                                <div><i class="fas fa-map-marker-alt"></i> Multiple Locations</div>
+                            </div>
+                        </div>
+                        <div class="aid-card-footer">
+                            <a href="#" class="btn-contact">Contact Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="aid-card">
+                        <div class="aid-card-header">
+                            <i class="fas fa-hands-helping"></i>
+                            <h3>Public Defender's Office</h3>
+                        </div>
+                        <div class="aid-card-body">
+                            <p>Government-provided legal representation for criminal cases.</p>
+                            <ul class="aid-services">
+                                <li><i class="fas fa-check"></i> Criminal Defense</li>
+                                <li><i class="fas fa-check"></i> Juvenile Cases</li>
+                                <li><i class="fas fa-check"></i> Appeals</li>
+                                <li><i class="fas fa-check"></i> Court Representation</li>
+                            </ul>
+                            <div class="aid-contact">
+                                <div><i class="fas fa-phone"></i> (800) 987-6543</div>
+                                <div><i class="fas fa-map-marker-alt"></i> County Courthouse</div>
+                            </div>
+                        </div>
+                        <div class="aid-card-footer">
+                            <a href="#" class="btn-contact">Contact Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="aid-card">
+                        <div class="aid-card-header">
+                            <i class="fas fa-home"></i>
+                            <h3>Housing Rights Center</h3>
+                        </div>
+                        <div class="aid-card-body">
+                            <p>Specialized assistance for housing-related legal issues.</p>
+                            <ul class="aid-services">
+                                <li><i class="fas fa-check"></i> Tenant Rights</li>
+                                <li><i class="fas fa-check"></i> Eviction Defense</li>
+                                <li><i class="fas fa-check"></i> Discrimination Cases</li>
+                                <li><i class="fas fa-check"></i> Habitability Issues</li>
+                            </ul>
+                            <div class="aid-contact">
+                                <div><i class="fas fa-phone"></i> (800) 567-8901</div>
+                                <div><i class="fas fa-map-marker-alt"></i> Downtown Center</div>
+                            </div>
+                        </div>
+                        <div class="aid-card-footer">
+                            <a href="#" class="btn-contact">Contact Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="eligibility-checker">
+                    <h4><i class="fas fa-clipboard-check"></i> Check Your Eligibility</h4>
+                    <p>Answer a few questions to see if you qualify for free legal aid:</p>
+                    <a href="#" class="btn-eligibility">Start Eligibility Check</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Know Your Rights Section -->
+        <div id="know-your-rights" class="resource-section">
+            <div class="section-header">
+                <h2><i class="fas fa-file-contract"></i> Know Your Rights</h2>
+            </div>
+            <div class="resource-content">
+                <p class="resource-description">
+                    Understanding your legal rights is essential for protecting yourself in various situations. Explore our guides to learn about your rights in different scenarios.
+                </p>
+                
+                <div class="rights-categories">
+                    <div class="rights-category">
+                        <div class="category-header">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Police Interactions</h3>
+                        </div>
+                        <div class="category-body">
+                            <p>Learn about your rights when interacting with law enforcement.</p>
+                            <ul class="rights-list">
+                                <li><a href="#"><i class="fas fa-angle-right"></i> During Traffic Stops</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> When Questioned</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Search and Seizure</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Miranda Rights</a></li>
+                            </ul>
+                        </div>
+                        <div class="category-footer">
+                            <a href="#" class="btn-more">View All</a>
+                        </div>
+                    </div>
+                    
+                    <div class="rights-category">
+                        <div class="category-header">
+                            <i class="fas fa-briefcase"></i>
+                            <h3>Workplace Rights</h3>
+                        </div>
+                        <div class="category-body">
+                            <p>Understand your rights as an employee or job applicant.</p>
+                            <ul class="rights-list">
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Wage and Hour Laws</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Discrimination Protection</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Workplace Safety</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Family and Medical Leave</a></li>
+                            </ul>
+                        </div>
+                        <div class="category-footer">
+                            <a href="#" class="btn-more">View All</a>
+                        </div>
+                    </div>
+                    
+                    <div class="rights-category">
+                        <div class="category-header">
+                            <i class="fas fa-home"></i>
+                            <h3>Housing Rights</h3>
+                        </div>
+                        <div class="category-body">
+                            <p>Learn about tenant rights and housing regulations.</p>
+                            <ul class="rights-list">
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Eviction Processes</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Security Deposits</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Repairs and Habitability</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Fair Housing Laws</a></li>
+                            </ul>
+                        </div>
+                        <div class="category-footer">
+                            <a href="#" class="btn-more">View All</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rights-pocket-guide">
+                    <h4><i class="fas fa-book"></i> Pocket Guides</h4>
+                    <p>Download our pocket guides to keep important rights information with you:</p>
+                    <div class="guides-row">
+                        <a href="#" class="guide-download">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Police Interaction Guide</span>
+                        </a>
+                        <a href="#" class="guide-download">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Tenant Rights Guide</span>
+                        </a>
+                        <a href="#" class="guide-download">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Consumer Rights Guide</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Templates Section -->
+        <div id="document-templates" class="resource-section">
+            <div class="section-header">
+                <h2><i class="fas fa-file-alt"></i> Document Templates</h2>
+            </div>
+            <div class="resource-content">
+                <p class="resource-description">
+                    Access free, legally-sound document templates that you can customize for your specific needs. These templates can help you handle various legal matters without expensive attorney fees.
+                </p>
+                
+                <div class="template-categories">
+                    <div class="template-category">
+                        <div class="template-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Housing & Property</h3>
+                        <ul class="template-list">
+                            <li><a href="#"><i class="fas fa-file-download"></i> Residential Lease Agreement</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Notice to Vacate</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Complaint for Repairs</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Room Rental Agreement</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="template-category">
+                        <div class="template-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Employment</h3>
+                        <ul class="template-list">
+                            <li><a href="#"><i class="fas fa-file-download"></i> Employment Contract</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> NDA Agreement</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Severance Agreement</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Workplace Complaint</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="template-category">
+                        <div class="template-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Family</h3>
+                        <ul class="template-list">
+                            <li><a href="#"><i class="fas fa-file-download"></i> Child Custody Agreement</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Simple Will</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Power of Attorney</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Living Will</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="template-category">
+                        <div class="template-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Consumer</h3>
+                        <ul class="template-list">
+                            <li><a href="#"><i class="fas fa-file-download"></i> Bill of Sale</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Promissory Note</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Debt Settlement Letter</a></li>
+                            <li><a href="#"><i class="fas fa-file-download"></i> Consumer Complaint</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="template-disclaimer">
+                    <div class="disclaimer-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="disclaimer-text">
+                        <h4>Legal Disclaimer</h4>
+                        <p>These templates are provided for informational purposes only and do not constitute legal advice. While we strive to provide accurate and up-to-date templates, laws vary by jurisdiction and change over time. We recommend consulting with a qualified attorney for specific legal matters.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legal Consultation Section -->
+        <div id="legal-consultation" class="resource-section">
+            <div class="section-header">
+                <h2><i class="fas fa-user-tie"></i> Legal Consultation</h2>
+            </div>
+            <div class="resource-content">
+                <p class="resource-description">
+                    Connect with qualified attorneys for professional legal advice tailored to your specific situation. Choose from various consultation options.
+                </p>
+                
+                <div class="consultation-options">
+                    <div class="consultation-card">
+                        <div class="consultation-header">
+                            <i class="fas fa-comments"></i>
+                            <h3>Chat Consultation</h3>
+                            <div class="price-tag">Free</div>
+                        </div>
+                        <div class="consultation-body">
+                            <p>Quick text-based consultation with a legal professional to get basic guidance.</p>
+                            <ul class="consultation-features">
+                                <li><i class="fas fa-check"></i> 15-Minute Session</li>
+                                <li><i class="fas fa-check"></i> Basic Legal Questions</li>
+                                <li><i class="fas fa-check"></i> General Guidance</li>
+                                <li><i class="fas fa-check"></i> Available 9am-5pm</li>
+                            </ul>
+                        </div>
+                        <div class="consultation-footer">
+                            <a href="#" class="btn-book">Start Chat</a>
+                        </div>
+                    </div>
+                    
+                    <div class="consultation-card featured">
+                        <div class="consultation-header">
+                            <i class="fas fa-video"></i>
+                            <h3>Video Consultation</h3>
+                            <div class="price-tag">$49.99</div>
+                        </div>
+                        <div class="consultation-body">
+                            <p>Face-to-face video consultation with a specialized attorney for detailed legal advice.</p>
+                            <ul class="consultation-features">
+                                <li><i class="fas fa-check"></i> 30-Minute Session</li>
+                                <li><i class="fas fa-check"></i> Specialized Attorney</li>
+                                <li><i class="fas fa-check"></i> Document Review</li>
+                                <li><i class="fas fa-check"></i> Follow-up Available</li>
+                            </ul>
+                        </div>
+                        <div class="consultation-footer">
+                            <a href="#" class="btn-book">Book Appointment</a>
+                        </div>
+                    </div>
+                    
+                    <div class="consultation-card">
+                        <div class="consultation-header">
+                            <i class="fas fa-user-friends"></i>
+                            <h3>In-Person Consultation</h3>
+                            <div class="price-tag">$99.99</div>
+                        </div>
+                        <div class="consultation-body">
+                            <p>Meet with an attorney in person for comprehensive legal assistance and representation.</p>
+                            <ul class="consultation-features">
+                                <li><i class="fas fa-check"></i> 60-Minute Session</li>
+                                <li><i class="fas fa-check"></i> Expert Legal Advice</li>
+                                <li><i class="fas fa-check"></i> Case Evaluation</li>
+                                <li><i class="fas fa-check"></i> Representation Options</li>
+                            </ul>
+                        </div>
+                        <div class="consultation-footer">
+                            <a href="#" class="btn-book">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="attorney-filter">
+                    <h4><i class="fas fa-search"></i> Find Attorneys by Specialty</h4>
+                    <div class="filter-options">
+                        <button class="filter-button active">All</button>
+                        <button class="filter-button">Criminal</button>
+                        <button class="filter-button">Family</button>
+                        <button class="filter-button">Immigration</button>
+                        <button class="filter-button">Real Estate</button>
+                        <button class="filter-button">Corporate</button>
+                        <button class="filter-button">Employment</button>
+                        <button class="filter-button">More...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <div class="section-header">
+                <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-content">
+                <div class="accordion" id="legalFAQ">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                How do I know if I qualify for free legal aid?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#legalFAQ">
+                            <div class="accordion-body">
+                                Eligibility for free legal aid typically depends on your income, assets, and the type of legal issue you're facing. Most legal aid organizations serve clients whose income is below a certain threshold (often 125-200% of the federal poverty level). You can use our eligibility checker tool or contact a legal aid organization directly to determine if you qualify.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Are the document templates legally binding?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#legalFAQ">
+                            <div class="accordion-body">
+                                Our templates are designed to comply with general legal standards, but laws vary by jurisdiction. For a document to be legally binding, it must meet specific requirements such as proper execution (signatures), legal capacity of the parties, and sometimes notarization or witnesses. While our templates provide a solid foundation, we recommend consulting with an attorney to ensure your specific document meets all legal requirements in your jurisdiction.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What should I bring to a legal consultation?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#legalFAQ">
+                            <div class="accordion-body">
+                                To make the most of your consultation, bring all relevant documents related to your legal issue. This may include contracts, correspondence, court documents, police reports, medical records, photographs, or any other evidence related to your case. Also, prepare a timeline of events and a list of questions you want to ask. Having organized information will help the attorney provide more accurate advice during your limited consultation time.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                How can I find out about my rights in a specific situation?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#legalFAQ">
+                            <div class="accordion-body">
+                                Our "Know Your Rights" section provides comprehensive information on rights in various scenarios. If you don't find information specific to your situation, you can use our search function or browse by category. For personalized advice, consider using our free chat consultation to speak with a legal professional who can provide guidance based on your specific circumstances and the laws in your jurisdiction.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+            <div class="newsletter-content">
+                <div class="newsletter-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="newsletter-text">
+                    <h3>Stay Informed About Your Rights</h3>
+                    <p>Subscribe to our legal newsletter for updates on law changes, new resources, and legal tips</p>
+                </div>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email address" class="newsletter-input">
+                    <button class="newsletter-button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-brand">
+                        <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
+                    </div>
+                    <p>Making communities safer through technology and awareness</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Important Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="mt-3">Emergency Helpline: <strong>100</strong></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CrimeVision AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Particles.js for background animation -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <!-- Particles.js Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize particles.js
+            particlesJS('particles', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#808080",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+
+</html>
