@@ -137,4 +137,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-For any inquiries, please contact [prathampatil@example.com](mailto:prathampatil@example.com)
+For any inquiries, please contact [patilpratham241@gmail.com](mailto:patilpratham241@gmail.com)
