@@ -1,36 +1,34 @@
-# Python virtual environments
-venv/
-.venv/
-env/
-ENV/
-
-# Python cache files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
-
-# Distribution / packaging
-dist/
+*.so
+.Python
+env/
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
 *.egg-info/
+.installed.cfg
+*.egg
 
-# Environment variables
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Environment Variables
 .env
 
-# Logs
-logs/*
-!logs/.gitkeep
-
-# Uploaded files
-uploads/*
-!uploads/.gitkeep
-
-# Large model files (uncomment if you don't want to include these)
-# models/*.h5
-# models/*.pt
-
-# IDE specific files
+# IDE files
 .idea/
 .vscode/
 *.swp
@@ -39,3 +37,24 @@ uploads/*
 # OS specific files
 .DS_Store
 Thumbs.db
+
+# Project specific
+*.log
+/uploads/*
+!/uploads/.gitkeep
+/suspects/*
+!/suspects/.gitkeep
+/logs/*
+!/logs/.gitkeep
+
+# Large model files
+*.h5
+*.pt
+*.pth
+*.onnx
+*.pb
+*.tflite
+*.mlmodel
+
+# Exclude specific files that should be included
+!models/.gitkeep

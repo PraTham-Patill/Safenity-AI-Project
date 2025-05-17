@@ -1,493 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrimeVision AI - Advanced Detection System</title>
-
-    <!-- Bootstrap for Styling -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;600;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Custom CSS -->
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    
+    <title>CrimeVision-AI - Crime Detection System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-    <!-- Loader Overlay -->
-    <div id="loader-overlay" class="loader-overlay">
-        <div class="loader"></div>
-        <div class="analysis-message">
-            Analyzing the incident for criminal activity...<br>
-            <span class="hint">Advanced AI processing in progress</span>
-        </div>
-    </div>
-
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <div id="particles"></div>
-    </div>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <i class="fas fa-shield-alt logo-icon"></i> CrimeVision<span class="text-highlight">AI</span>
-            </a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">CrimeVision-AI</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/"><i class="fas fa-home"></i> Home</a>
+                        <a class="nav-link active" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                        <a class="nav-link" href="/upload">Upload</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/history"><i class="fas fa-history"></i> History</a>
+                        <a class="nav-link" href="/live">Live Detection</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/settings"><i class="fas fa-cog"></i> Settings</a>
+                        <a class="nav-link" href="/history">History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="main-container">
-        <!-- Header Section -->
-        <div class="header-section">
-            <h1 class="title-text">Advanced Crime Detection System</h1>
-            <p class="subtitle-text">Powered by Deep Learning & Computer Vision</p>
-            <div class="tech-badges">
-                <span class="badge">AI Powered</span>
-                <span class="badge">Real-time Detection</span>
-                <span class="badge">Facial Recognition</span>
-                <span class="badge">Behavioral Analysis</span>
-            </div>
-        </div>
-
-        <!-- Upload Section -->
-        <div class="glass-container">
-            <div class="container-header">
-                <i class="fas fa-camera-retro"></i> Crime Detection Methods
-            </div>
-
-
-            <!-- Live Detection Button (Prominent) -->
-            <div class="live-detection-wrapper">
-                <a href="{{ url_for('live_detection') }}" class="btn-live-detection">
-                    <i class="fas fa-video"></i> Launch Live Crime Detection
-                </a>
-
-            </div>
-
-            <!-- Tabs for Upload and Info -->
-            <ul class="nav nav-tabs" id="detectionTabs">
-                <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#upload-tab">
-                        <i class="fas fa-upload"></i> Upload Media
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#info-tab">
-                        <i class="fas fa-info-circle"></i> How It Works
-                    </a>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-                <!-- Upload Tab -->
-                <div class="tab-pane fade show active" id="upload-tab">
-                    <form id="upload-form" action="/detect" method="post" enctype="multipart/form-data">
-                        <div class="upload-box">
-                            <div class="upload-icon" id="upload-trigger">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                            </div>
-                            <label for="file" class="form-label">Select Image or Video File</label>
-                            <input type="file" name="file" id="file" class="form-control d-none"
-                                accept=".jpg,.jpeg,.png,.mp4,.avi,.mov,.mkv" required>
-
-                            <div class="upload-options mt-3">
-                                
-                                <!-- Find the detection options section and remove the face detection checkbox -->
-                                <div class="detection-options">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="send-alert" name="send-alert" value="on">
-                                        <label class="form-check-label" for="send-alert">
-                                            <i class="fas fa-bell"></i> Send Alert Notification
-                                        </label>
-                                    </div>
-                                    <!-- Face detection checkbox removed -->
-                                </div>
-                            </div>
-
-                            <div class="upload-actions mt-3">
-                                <button type="button" id="record-video-btn" class="btn btn-outline-info me-2">
-                                    <i class="fas fa-video"></i> Record Video
-                                </button>
-                                <button type="button" id="upload-file-btn" class="btn btn-outline-primary">
-                                    <i class="fas fa-file-upload"></i> Upload File
-                                </button>
-                            </div>
-
-                            <div id="selected-file-info" class="mt-3 d-none">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-file-alt me-2"></i>
-                                    <span id="file-name">No file selected</span>
-                                    <button type="button" id="remove-file" class="btn btn-sm btn-outline-danger float-end">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-3">
-                            <button type="submit" class="btn-analyze">
-                                <i class="fas fa-search"></i> Analyze for Criminal Activity
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Info Tab -->
-                <div class="tab-pane fade" id="info-tab">
-                    <div class="info-section p-4">
-                        <h4>How CrimeVision AI Works</h4>
-                        <p>Our advanced AI system uses deep learning algorithms to detect and analyze potential criminal
-                            activity:</p>
-                        <ol>
-                            <li>Upload video footage or connect to live camera feed</li>
-                            <li>Our AI analyzes each frame for suspicious behavior patterns</li>
-                            <li>Facial recognition matches against database of known offenders</li>
-                            <li>Behavioral analysis identifies unusual or threatening actions</li>
-                            <li>Real-time alerts are generated when criminal activity is detected</li>
-                        </ol>
-                        <p class="mt-3">Use our Live Detection feature for continuous monitoring of security cameras.
-                        </p>
+    <div class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>CrimeVision-AI</h1>
+                    <h2>Advanced Crime Detection System</h2>
+                    <p>Using artificial intelligence to identify criminal activities in videos and images. The system can detect various types of crimes, extract faces of potential suspects, detect weapons, and send SMS alerts.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="/upload" class="btn btn-primary btn-lg">Upload Video/Image</a>
+                        <a href="/live" class="btn btn-outline-light btn-lg">Live Detection</a>
                     </div>
                 </div>
-            </div>
-
-            {% if result %}
-            <div class="result-container">
-                <div class="result-header">
-                    <i class="fas fa-clipboard-check"></i> Analysis Results
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="{{ url_for('static', filename='img/hero-image.svg') }}" alt="AI Crime Detection" class="img-fluid">
                 </div>
-                <div class="result-content">
-                    <div class="alert-badge">{{ result.type }}</div>
-                    <p class="result-text">{{ result }}</p>
-                    <div class="confidence-meter">
-                        <div class="confidence-label">AI Confidence: 94%</div>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 94%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn-action"><i class="fas fa-save"></i> Save Report</button>
-                    <button class="btn-action"><i class="fas fa-share-alt"></i> Share</button>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-
-        <!-- Features Section -->
-        <div class="features-section">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                <h3>Real-time Detection</h3>
-                <p>Process video streams with minimal latency</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
-                <h3>Analytical Reports</h3>
-                <p>Generate detailed reports with visuals</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                <h3>Secure Processing</h3>
-                <p>End-to-end encryption for sensitive data</p>
             </div>
         </div>
     </div>
 
-     
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>CrimeVision<span class="text-highlight">AI</span></h4>
-                <p>Making communities safer through technology and awareness</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">API Integration</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contact Us</h4>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <div class="container py-5">
+        <h2 class="text-center mb-5">Key Features</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/crime-detection.svg') }}" alt="Crime Detection">
+                    </div>
+                    <h3>Crime Detection</h3>
+                    <p>Uses a ResNet-based deep learning model to classify videos/images into different crime categories.</p>
                 </div>
-                <p class="mt-3">Emergency Helpline: <strong>100</strong></p>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/face-recognition.svg') }}" alt="Suspect Identification">
+                    </div>
+                    <h3>Suspect Identification</h3>
+                    <p>Extracts and saves faces of potential suspects from crime footage for later identification.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/weapon-detection.svg') }}" alt="Weapon Detection">
+                    </div>
+                    <h3>Weapon Detection</h3>
+                    <p>Identifies potential weapons in crime scenes to assess threat levels and inform authorities.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/sms-alert.svg') }}" alt="SMS Alerts">
+                    </div>
+                    <h3>SMS Alerts</h3>
+                    <p>Sends immediate notifications when crimes are detected to authorities or designated contacts.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/history.svg') }}" alt="History Tracking">
+                    </div>
+                    <h3>History Tracking</h3>
+                    <p>Maintains a comprehensive history of all detections for review and analysis.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/live-camera.svg') }}" alt="Live Camera Integration">
+                    </div>
+                    <h3>Live Camera Integration</h3>
+                    <p>Supports real-time crime detection through webcam or connected security cameras.</p>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 CrimeVision AI. All rights reserved. 
+    </div>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>CrimeVision-AI</h5>
+                    <p>An advanced crime detection system using artificial intelligence.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white">Home</a></li>
+                        <li><a href="/upload" class="text-white">Upload</a></li>
+                        <li><a href="/live" class="text-white">Live Detection</a></li>
+                        <li><a href="/history" class="text-white">History</a></li>
+                        <li><a href="/about" class="text-white">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact</h5>
+                    <p>Email: <a href="mailto:patilpratham241@gmail.com" class="text-white">patilpratham241@gmail.com</a></p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2023 CrimeVision-AI. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Particles.js for background animation -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize particles.js
-            particlesJS('particles', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#ffffff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                    },
-                    "opacity": {
-                        "value": 0.3,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#808080",
-                        "opacity": 0.2,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 0.5
-                            }
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-
-            const form = document.getElementById('upload-form');
-            const loaderOverlay = document.getElementById('loader-overlay');
-            const fileInput = document.getElementById('file');
-
-            // File Upload Handling
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                if (!fileInput.files.length) {
-                    alert('Please select a file to analyze');
-                    return;
-                }
-
-                const allowedTypes = [
-                    'image/jpeg',
-                    'image/png',
-                    'video/mp4',
-                    'video/avi',
-                    'video/mov',
-                    'video/mkv'
-                ];
-                const fileType = fileInput.files[0].type;
-                if (!allowedTypes.includes(fileType)) {
-                    alert('Please upload a valid image or video file (jpg, png, mp4, avi, mov, mkv)');
-                    return;
-                }
-
-                loaderOverlay.style.display = 'flex';
-
-                const formData = new FormData(form);
-
-                fetch('/detect', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.text();
-                    })
-                    .then(html => {
-                        document.open();
-                        document.write(html);
-                        document.close();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        loaderOverlay.innerHTML = `
-                        <div style="color: red; text-align: center;">
-                            <h2>Error Analyzing Incident</h2>
-                            <p>${error.message}</p>
-                            <button onclick="window.location.reload()" class="btn btn-danger mt-3">
-                                Try Again
-                            </button>
-                        </div>
-                    `;
-                    });
-            });
-        });
-    </script>
-<!-- Update the record video button to point to the new page -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const fileInput = document.getElementById('file');
-        const uploadTrigger = document.getElementById('upload-trigger');
-        const recordVideoBtn = document.getElementById('record-video-btn');
-        const uploadFileBtn = document.getElementById('upload-file-btn');
-        const selectedFileInfo = document.getElementById('selected-file-info');
-        const fileNameDisplay = document.getElementById('file-name');
-        const removeFileBtn = document.getElementById('remove-file');
-        const uploadForm = document.getElementById('upload-form');
-        
-        // Make the cloud icon clickable to trigger file selection
-        uploadTrigger.addEventListener('click', function() {
-            uploadFileBtn.click();
-        });
-        
-        // Upload existing file button
-        uploadFileBtn.addEventListener('click', function() {
-            fileInput.click();
-        });
-        
-        // Record video button
-        recordVideoBtn.addEventListener('click', function() {
-            // Redirect to the record video page
-            window.location.href = '/record_video';
-        });
-        
-        // Display selected file name
-        fileInput.addEventListener('change', function() {
-            if (this.files.length > 0) {
-                selectedFileInfo.classList.remove('d-none');
-                fileNameDisplay.textContent = this.files[0].name;
-                
-                // Enable/disable face detection based on file type
-                const fileName = this.files[0].name.toLowerCase();
-                const faceDetectionCheckbox = document.getElementById('face-detection');
-                
-                if (fileName.endsWith('.mp4') || fileName.endsWith('.avi') || 
-                    fileName.endsWith('.mov') || fileName.endsWith('.mkv')) {
-                    // It's a video, enable face detection
-                    faceDetectionCheckbox.disabled = false;
-                    faceDetectionCheckbox.checked = true;
-                } else if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || 
-                           fileName.endsWith('.png')) {
-                    // It's an image, face detection is possible but less effective
-                    faceDetectionCheckbox.disabled = false;
-                    faceDetectionCheckbox.checked = true;
-                } else {
-                    // Unknown file type, disable face detection
-                    faceDetectionCheckbox.disabled = true;
-                    faceDetectionCheckbox.checked = false;
-                }
-            } else {
-                selectedFileInfo.classList.add('d-none');
-                fileNameDisplay.textContent = 'No file selected';
-            }
-        });
-        
-        // Remove selected file
-        removeFileBtn.addEventListener('click', function() {
-            fileInput.value = '';
-            selectedFileInfo.classList.add('d-none');
-            fileNameDisplay.textContent = 'No file selected';
-        });
-        
-        // Form submission validation
-        uploadForm.addEventListener('submit', function(e) {
-            if (!fileInput.files.length) {
-                e.preventDefault();
-                alert('Please select a file to analyze');
-                return;
-            }
-            
-            // Show loading state
-            const submitButton = this.querySelector('button[type="submit"]');
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            submitButton.disabled = true;
-        });
-    });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-
 </html>
