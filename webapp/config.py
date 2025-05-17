@@ -1,31 +1,33 @@
 import os
-from datetime import timedelta
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class Config:
-    # Flask configuration
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'uploads')
+    """Configuration settings for the Flask application"""
+    # Flask settings
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key-for-development')
+    UPLOAD_FOLDER = 'uploads'
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 MB max upload size
-    PERMANENT_SESSION_LIFETIME = timedelta(days=1)
     
-    # Crime detection configuration
-    CRIME_CLASSES = [
-        'Abuse', 'Arrest', 'Arson', 'Assault', 'Burglary', 'Explosion', 
-        'Fighting', 'Normal Activity', 'Road Accident', 'Robbery', 'Shooting', 
-        'Shoplifting', 'Stealing', 'Vandalism'
-    ]
+    # Allowed file extensions
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mov'}
     
-    # Weapon detection configuration
-    WEAPON_CLASSES = [
-        'Knife', 'Gun', 'No Weapon'
-    ]
+    # Model paths
+    CRIME_MODEL_PATH = os.environ.get('CRIME_MODEL_PATH', os.path.join('models', 'crime_detection_model.h5'))
+    WEAPON_MODEL_PATH = os.environ.get('WEAPON_MODEL_PATH', os.path.join('models', 'weapon_detection_model.h5'))
     
-    # Face extraction configuration
-    FACE_CONFIDENCE_THRESHOLD = 0.5
-    FACE_SAVE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'suspects')
+    # Detection settings
+    CRIME_THRESHOLD = float(os.environ.get('CRIME_THRESHOLD', '0.5'))
+    WEAPON_THRESHOLD = float(os.environ.get('WEAPON_THRESHOLD', '0.5'))
     
-    # SMS notification configuration
-    SMS_ENABLED = bool(os.environ.get('TWILIO_ACCOUNT_SID') and 
-                      os.environ.get('TWILIO_AUTH_TOKEN') and 
-                      os.environ.get('TWILIO_PHONE_NUMBER') and 
-                      os.environ.get('NOTIFICATION_PHONE_NUMBER'))
+    # SMS notification settings
+    TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
+    TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
+    TWILIO_PHONE_NUMBER = os.environ.get('TWILIO_PHONE_NUMBER')
+    NOTIFICATION_PHONE_NUMBER = os.environ.get('NOTIFICATION_PHONE_NUMBER')
+    
+    # Face detection settings
+    FACE_MIN_SIZE = int(os.environ.get('FACE_MIN_SIZE', '30'))
+    FACE_SAVE_PATH = 'suspects'
