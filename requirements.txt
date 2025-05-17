@@ -1,0 +1,19 @@
+# CrimeVision-AI Project Dependencies
+
+# Web Framework
+flask>=2.0.1
+werkzeug>=2.0.1
+
+# Computer Vision & AI
+opencv-python>=4.5.3
+numpy>=1.21.0
+tensorflow>=2.6.0
+
+# SMS Notifications
+twilio>=7.0.0
+python-dotenv>=0.19.0
+
+# Utilities
+python-dateutil>=2.8.2
+requests>=2.26.0
+pillow>=8.3.1
