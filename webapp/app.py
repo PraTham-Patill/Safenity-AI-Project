@@ -3,9 +3,9 @@ import logging
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from werkzeug.utils import secure_filename
-from .config import Config
-from .detection import CrimeDetector, WeaponDetector, FaceExtractor
-from .notifications import send_alert
+from config import Config
+from detection import CrimeDetector, WeaponDetector, FaceExtractor
+from sms import send_alert
 
 # Configure logging
 logging.basicConfig(
@@ -117,7 +117,7 @@ def upload():
 @app.route('/live')
 def live():
     """Render the live detection page"""
-    return render_template('live.html')
+    return render_template('live_detection.html')
 
 @app.route('/api/detect', methods=['POST'])
 def api_detect():
@@ -191,6 +191,41 @@ def history():
     history_entries.sort(key=lambda x: x['timestamp'], reverse=True)
     
     return render_template('history.html', history=history_entries)
+
+@app.route('/dashboard')
+def dashboard():
+    """Render the dashboard page"""
+    return render_template('dashboard.html')
+
+@app.route('/emergency-contacts')
+def emergency_contacts():
+    """Render the emergency contacts page"""
+    return render_template('emergency-contacts.html')
+
+@app.route('/crime-news')
+def crime_news():
+    """Render the crime news page"""
+    return render_template('crime-news.html')
+
+@app.route('/cybersecurity')
+def cybersecurity():
+    """Render the cybersecurity page"""
+    return render_template('cybersecurity.html')
+
+@app.route('/legal-resources')
+def legal_resources():
+    """Render the legal resources page"""
+    return render_template('legal-resources.html')
+
+@app.route('/safety-tools')
+def safety_tools():
+    """Render the safety tools page"""
+    return render_template('safety-tools.html')
+
+@app.route('/police-stations')
+def police_stations():
+    """Render the police stations page"""
+    return render_template('police-stations.html')
 
 @app.route('/about')
 def about():

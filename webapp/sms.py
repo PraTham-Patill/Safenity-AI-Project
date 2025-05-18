@@ -1,83 +1,48 @@
+import os
+import logging
 from twilio.rest import Client
-from twilio.base.exceptions import TwilioRestException
-from config import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER, RECIPIENT_PHONE_NUMBER, SMS_ENABLED, logger
-from utils import validate_phone_number
+from dotenv import load_dotenv
 
-def send_sms_alert(crime_class, prediction_score, timestamp, suspect_count, weapon_detected):
-    """Send SMS alert for crime detection"""
-    try:
-        # Check if SMS is enabled
-        if not SMS_ENABLED:
-            print("⚠️ SMS alerts disabled: Missing Twilio credentials or recipient number")
-            return False
-            
-        # Validate and format phone numbers
-        from_number = validate_phone_number(TWILIO_PHONE_NUMBER)
-        to_number = validate_phone_number(RECIPIENT_PHONE_NUMBER)
+# Load environment variables
+load_dotenv()
+
+# Configure logging
+logger = logging.getLogger(__name__)
+
+def send_alert(message):
+    """Send SMS alert using Twilio
+    
+    Args:
+        message: The message to send
         
-        if not from_number or not to_number:
-            print(f"⚠️ Invalid phone number format. From: {TWILIO_PHONE_NUMBER}, To: {RECIPIENT_PHONE_NUMBER}")
-            return False
-            
-        # Prepare SMS message content
-        message = (
-            f"🚨 CRIME ALERT: {crime_class} detected with {prediction_score:.2f}% confidence. "
-            f"Time: {timestamp}. "
-            f"Suspects: {suspect_count}. "
-            f"Weapon: {'Yes' if weapon_detected else 'No'}. "
-            f"Check dashboard for details."
-        )
-        
-        # Send SMS using Twilio
-        try:
-            client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-            sms = client.messages.create(
-                body=message,
-                from_=from_number,
-                to=to_number
-            )
-            print(f"✅ SMS alert sent successfully! SID: {sms.sid}")
-            return True
-        except Exception as e:
-            print(f"⚠️ Twilio SMS error: {str(e)}")
-            return False
-                
-    except Exception as e:
-        print(f"⚠️ Error preparing SMS: {str(e)}")
+    Returns:
+        Boolean indicating success or failure
+    """
+    # Get Twilio credentials from environment variables
+    account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+    auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
+    from_number = os.environ.get('TWILIO_PHONE_NUMBER')
+    to_number = os.environ.get('NOTIFICATION_PHONE_NUMBER')
+    
+    # Check if all required credentials are available
+    if not all([account_sid, auth_token, from_number, to_number]):
+        logger.warning("Twilio credentials not configured. SMS alert not sent.")
         return False
-
-def send_sms_via_twilio(to_number, message):
-    """Send SMS via Twilio with comprehensive error handling"""
-    # Check Twilio credentials
-    if not all([TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER]):
-        logger.error("Incomplete Twilio credentials")
-        return False, "Incomplete Twilio configuration"
-
+    
     try:
-        # Validate numbers
-        from_number = validate_phone_number(TWILIO_PHONE_NUMBER)
-        to_number = validate_phone_number(to_number)
-
-        if not from_number or not to_number:
-            logger.error(f"Invalid phone numbers. From: {from_number}, To: {to_number}")
-            return False, "Invalid phone number format"
-
         # Initialize Twilio client
-        client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-
+        client = Client(account_sid, auth_token)
+        
         # Send message
         message = client.messages.create(
             body=message,
             from_=from_number,
             to=to_number
         )
-
-        logger.info(f"SMS sent successfully to {to_number}. SID: {message.sid}")
-        return True, message.sid
-
-    except TwilioRestException as e:
-        logger.error(f"Twilio Error: {e}")
-        return False, str(e)
+        
+        logger.info(f"SMS alert sent successfully. SID: {message.sid}")
+        return True
+        
     except Exception as e:
-        logger.error(f"Unexpected error sending SMS: {e}")
-        return False, "Unexpected error sending SMS"
+        logger.error(f"Error sending SMS alert: {e}")
+        return False

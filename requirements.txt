@@ -1,19 +1,14 @@
-# Safenity-AI Project Dependencies
-
-# Web Framework
-flask>=2.0.1
-werkzeug>=2.0.1
-
-# Computer Vision & AI
-opencv-python>=4.5.3
-numpy>=1.21.0
-tensorflow>=2.6.0
-
-# SMS Notifications
-twilio>=7.0.0
-python-dotenv>=0.19.0
-
-# Utilities
-python-dateutil>=2.8.2
-requests>=2.26.0
-pillow>=8.3.1
+Flask==2.0.1
+Werkzeug==2.0.1
+opencv-python==4.5.3
+numpy==1.21.2
+tensorflow==2.6.0
+twilio==7.0.0
+python-dotenv==0.19.0
+Pillow==8.3.1
+requests==2.26.0
+python-dateutil==2.8.2
+matplotlib==3.4.3
+pandas==1.3.2
+scikit-learn==0.24.2
+tqdm==4.62.2
