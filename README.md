@@ -84,8 +84,8 @@ Safenity AI/
 
 1. Clone the repository:
    ```
-   git clone https://github.com/PraTham-Patill/Safenity-AI.git
-   cd Safenity-AI
+   git clone https://github.com/PraTham-Patill/Safenity-AI-Project.git
+   cd Safenity-AI-Project
    ```
 
 2. Create and activate a virtual environment:
