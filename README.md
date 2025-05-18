@@ -1,22 +1,42 @@
-# CrimeVision-AI: Crime Detection and Alert System
+# Safenity AI: Crime Detection and Public Safety System
 
-## Overview
-CrimeVision-AI is an advanced crime detection system that uses artificial intelligence to identify criminal activities in videos and images. The system can detect various types of crimes, extract faces of potential suspects, detect weapons, and send SMS alerts to authorities or designated contacts.
+## Abstract
+Safenity AI provides comprehensive crime detection and community safety features through an intuitive web interface. It features an intuitive web dashboard with SOS alerts, emergency contacts, crime updates, cybersecurity tips, legal help, and other safety tools. Detected crime type is shown on the results page for quick assessment and response.
 
-## Features
+## Objective
+Develop a smart surveillance system for real-time crime detection and public safety enhancement.
 
-- **Crime Detection**: Uses a ResNet-based deep learning model to classify videos/images into different crime categories
-- **Suspect Identification**: Extracts and saves faces of potential suspects from crime footage
-- **Weapon Detection**: Identifies potential weapons in crime scenes
-- **SMS Alerts**: Sends immediate notifications when crimes are detected
-- **History Tracking**: Maintains a comprehensive history of all detections
-- **Live Camera Integration**: Supports real-time crime detection through webcam
-- **User-friendly Interface**: Modern web interface for easy interaction
+### System Capabilities
+- Detects crimes using ResNet-50
+- Identifies weapons via YOLOv5
+- Displays suspect visuals on result page
+
+### Key Features
+- Live monitoring dashboard with instant alerts
+- Emergency contact access
+- Modules on cyber safety, legal info, news, and more
+
+## Method/Approach
+
+### Technical Stack
+- **Backend**: Python Flask, RESTful APIs
+- **Frontend**: HTML5/Bootstrap, JavaScript
+- **AI Models**: ResNet-50 (UCF-tuned), YOLOv5, OpenCV
+
+## Results/Findings
+
+| Feature | Description | Impact |
+|---------|-------------|--------|
+| Incident Classification & Security Alerts | Recognizes and classifies critical threat events | Enables quick and targeted response by authorities |
+| Emergency Contacts | Quick access to police, fire, and medical support | Accelerates emergency communication |
+| Severity Classification | Labels events as Low / Moderate / High risk | Prioritizes response actions |
+| Model | Uses ResNet-50 pretrained on ImageNet and fine-tuned on UCF Crime Dataset | Achieves 89% accuracy in classifying crime types |
+| Visual Markers | Highlights suspects and evidence frames (red/blue boxes) | Simplifies analysis and review |
 
 ## Project Structure
 
 ```
-CrimeVision-AI/
+Safenity AI/
 ├── logs/                  # Log files and detection history
 ├── models/                # Trained AI models
 ├── scripts/               # Python scripts for detection and training
@@ -32,10 +52,24 @@ CrimeVision-AI/
 └── README.md              # Project documentation
 ```
 
+## Features
+
+- **Crime Detection**: Uses a ResNet-based deep learning model to classify videos/images into different crime categories
+- **Suspect Identification**: Extracts and saves faces of potential suspects from crime footage
+- **Weapon Detection**: Identifies potential weapons in crime scenes using YOLOv5
+- **SMS Alerts**: Sends immediate notifications when crimes are detected
+- **History Tracking**: Maintains a comprehensive history of all detections
+- **Live Camera Integration**: Supports real-time crime detection through webcam
+- **User-friendly Interface**: Modern web interface for easy interaction
+- **Emergency Contacts**: Quick access to police, fire, and medical support
+- **Cybersecurity Tips**: Information on staying safe online
+- **Legal Aid**: Resources for legal assistance
+- **Safety Tools**: Additional tools for personal and community safety
+
 ## Technologies Used
 
-- **Backend**: Python, Flask
-- **AI/ML**: TensorFlow, OpenCV, ResNet
+- **Backend**: Python, Flask, RESTful APIs
+- **AI/ML**: TensorFlow, OpenCV, ResNet-50, YOLOv5
 - **Frontend**: HTML, CSS, JavaScript, Bootstrap
 - **Notifications**: Twilio SMS API
 
@@ -50,8 +84,8 @@ CrimeVision-AI/
 
 1. Clone the repository:
    ```
-   git clone https://github.com/PraTham-Patill/CrimeVision-AI-Project.git
-   cd CrimeVision-AI-Project
+   git clone https://github.com/PraTham-Patill/Safenity-AI.git
+   cd Safenity-AI
    ```
 
 2. Create and activate a virtual environment:
@@ -120,6 +154,10 @@ The system can detect the following types of activities:
 - Stealing
 - Vandalism
 
+## Conclusion and Future Work
+
+This project provides real-time crime detection with alerts, report generation, and emergency contact support. Future work includes expanding the dashboard with features like Crime News, Station Locator, Cybersecurity, Legal Aid, and Safety Tools.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -134,6 +172,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - OpenCV for computer vision tasks
 - Flask for web framework
 - Twilio for SMS notifications
+- YOLOv5 for object detection
+- UCF Crime Dataset for model training
 
 ## Contact
 
