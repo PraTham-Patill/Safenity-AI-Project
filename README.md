@@ -6,15 +6,28 @@ Safenity AI provides comprehensive crime detection and community safety features
 ## Objective
 Develop a smart surveillance system for real-time crime detection and public safety enhancement.
 
-### System Capabilities
-- Detects crimes using ResNet-50
-- Identifies weapons via YOLOv5
-- Displays suspect visuals on result page
+System Capabilities
+Crime Classification with ResNet-50
+Detects and classifies suspicious activities in surveillance footage using a ResNet-50 model trained on the UCF Crime Dataset.
 
-### Key Features
-- Live monitoring dashboard with instant alerts
-- Emergency contact access
-- Modules on cyber safety, legal info, news, and more
+Weapon Detection using YOLOv5
+Identifies weapons such as knives or guns in video frames using the YOLOv5 object detection algorithm.
+
+Result Visualization
+Displays the detected crime type and suspect visuals clearly on the result page for easy interpretation.
+
+Key Features
+Live Monitoring Dashboard
+Offers real-time crime insights, detection summaries, and visual alerts through a user-friendly web dashboard.
+
+SOS Emergency Button
+Enables users to send quick alerts with live location to emergency contacts in case of danger.
+
+Quick Emergency Access
+Provides direct access to emergency services, personal emergency contacts, and nearby police stations.
+
+Informative Modules
+Includes sections on Cybersecurity Awareness, Legal Rights & Assistance, Crime News & Alerts, and Personal Safety Tools.
 
 ## Method/Approach
 
