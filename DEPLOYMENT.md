@@ -14,8 +14,8 @@ This guide provides instructions for deploying the CrimeVision-AI application to
 
 1. Clone the repository:
    ```
-   git clone https://github.com/PraTham-Patill/CrimeVision-AI-Project.git
-   cd CrimeVision-AI-Project
+   git clone https://github.com/PraTham-Patill/Safenity-AI-Project.git
+   cd Safenity-AI-Project
    ```
 
 2. Create and activate a virtual environment:
@@ -63,7 +63,7 @@ This guide provides instructions for deploying the CrimeVision-AI application to
 
 2. Create a new Heroku app:
    ```
-   heroku create crimevision-ai
+   heroku create Safenity-ai
    ```
 
 3. Add a Procfile to the root directory with the following content:
@@ -102,12 +102,12 @@ This guide provides instructions for deploying the CrimeVision-AI application to
 
 2. Initialize your EB application:
    ```
-   eb init -p python-3.8 crimevision-ai
+   eb init -p python-3.8 Safenity-ai
    ```
 
 3. Create an environment and deploy:
    ```
-   eb create crimevision-ai-env
+   eb create Safenity-ai-env
    ```
 
 4. Configure environment variables:
@@ -139,12 +139,12 @@ This guide provides instructions for deploying the CrimeVision-AI application to
 
 2. Build the Docker image:
    ```
-   docker build -t crimevision-ai .
+   docker build -t Safenity-ai .
    ```
 
 3. Run the container:
    ```
-   docker run -p 5000:5000 --env-file .env crimevision-ai
+   docker run -p 5000:5000 --env-file .env Safenity-ai
    ```
 
 ## Continuous Deployment
@@ -175,7 +175,7 @@ jobs:
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: "crimevision-ai"
+        heroku_app_name: "Safenity-ai"
         heroku_email: ${{ secrets.HEROKU_EMAIL }}
 ```
 
