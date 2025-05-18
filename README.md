@@ -1,4 +1,4 @@
-# Safenity AI: Crime Detection and Public Safety System
+# Safenity AI: Empowering Safety Through Intelligent Surveillance.
 
 ## Abstract
 Safenity AI provides comprehensive crime detection and community safety features through an intuitive web interface. It features an intuitive web dashboard with SOS alerts, emergency contacts, crime updates, cybersecurity tips, legal help, and other safety tools. Detected crime type is shown on the results page for quick assessment and response.
