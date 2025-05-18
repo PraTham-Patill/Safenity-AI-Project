@@ -1,4 +1,4 @@
-# CrimeVision-AI Project Dependencies
+# Safenity-AI Project Dependencies
 
 # Web Framework
 flask>=2.0.1
